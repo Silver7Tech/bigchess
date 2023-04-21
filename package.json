@@ -1,0 +1,19 @@
+{
+  "name": "bigchess-main",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Ibrahim Maouhoubi",
+  "license": "MIT",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "start:frontend": "yarn --cwd packages/frontend start",
+    "start:backend": "yarn --cwd packages/backend dev",
+    "start": "npm-run-all --parallel start:*"
+  },
+  "devDependencies": {
+    "npm-run-all": "^4.1.5"
+  }
+}
