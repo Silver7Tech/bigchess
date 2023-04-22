@@ -23,4 +23,4 @@ db
 *.njsproj
 *.sln
 *.sw?
-packages/backend/.env/.env.production
+.env.production
