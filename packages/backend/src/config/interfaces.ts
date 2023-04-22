@@ -1,0 +1,36 @@
+export type EnvVars = Partial<{
+  PORT: number;
+  HOST: string;
+  APP_NAME: string;
+  API_PREFIX: string;
+  PUBLIC_URL: string;
+  MORGAN_ENABLED: boolean;
+  MORGAN_TYPE: string;
+  DATABASE_URL: string;
+  JWT_ISSUER: string;
+  JWT_AUDIENCE: string;
+  JWT_EXPIRATION: string;
+  JWT_PUBLIC_KEY: string;
+  JWT_PRIVATE_KEY: string;
+  CORS_ENABLED: boolean;
+  NODE_ENV: string;
+  CORS_ORIGIN: string;
+  TRPC_PLAYGROUND_ENABLED: boolean;
+  AUTH0_CLIENT_ID: string;
+  AUTH0_CLIENT_SECRET: string;
+  AUTH0_DOMAIN: string;
+  SPACES_STATIC_DOMAIN: string;
+  SPACES_REGION: string;
+  SPACES_ENDPOINT: string;
+  SPACES_BUCKET: string;
+  SPACES_CLIENT_ID: string;
+  SPACES_CHUNK_SIZE: number;
+  SPACES_SECRET_KEY: string;
+  SECURITY_DELAY: number;
+  SECURITY_MAX_TRIES: number;
+  SENDGRID_API_KEY: string;
+  SENDGRID_FROM: string;
+  MEDIA_STRICT_MODE: boolean;
+}>;
+
+export type EnvKeys = keyof EnvVars;
