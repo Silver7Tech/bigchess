@@ -7,7 +7,10 @@
   "scripts": {
     "start": "node index.js",
     "dev": "cross-env nodemon index.js",
-    "prisma:generate": "prisma generate"
+    "prisma:generate": "prisma generate",
+    "db:restart": "npm run db:stop && npm run db:start",
+    "db:start": "docker compose --env-file .empty.env --file db-cluster.yaml up --detach",
+    "db:stop": "docker compose --env-file .empty.env --file db-cluster.yaml down"
   },
   "dependencies": {
     "@prisma/client": "^4.13.0",
