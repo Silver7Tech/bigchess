@@ -1,5 +1,5 @@
 import debug from 'debug';
-import dotenv from 'dotenv';
+import * as dotenv from 'dotenv';
 import { EnvKeys, EnvVars } from './interfaces';
 
 import variables, { VariableValue } from './variables';
@@ -7,11 +7,11 @@ import variables, { VariableValue } from './variables';
 const log = debug('app:config');
 
 dotenv.config({
-  path: '.env/.env.common',
+  path: '.env/.common.env',
 });
 
 dotenv.config({
-  path: `.env/.env.${process.env.NODE_ENV || 'local'}`,
+  path: `.env/.${process.env.NODE_ENV || 'development'}.env`,
 });
 
 type GNonNullableAppEnvVar<T extends EnvKeys> = NonNullable<EnvVars[T]>;

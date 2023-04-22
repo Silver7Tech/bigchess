@@ -3,14 +3,22 @@
   "version": "1.0.0",
   "main": "dist/index.js",
   "author": "Ibrahim Maouhoubi",
-  "license": "MIT",
+  "license": "ISC",
   "scripts": {
-    "start": "node index.js",
-    "dev": "cross-env nodemon index.js",
+    "start": "prisma generate && node .",
+    "dev": "nodemon",
+    "clean": "rimraf dist bundle.min.*",
+    "build": "swc ./src -d dist -s true --copy-files && npm run bundle",
+    "bundle": "node ./scripts/bundle.js",
+    "build:watch": "swc ./src -d dist -w",
     "prisma:generate": "prisma generate",
+    "prisma:push": "prisma db push",
     "db:restart": "npm run db:stop && npm run db:start",
     "db:start": "docker compose --env-file .empty.env --file db-cluster.yaml up --detach",
-    "db:stop": "docker compose --env-file .empty.env --file db-cluster.yaml down"
+    "db:stop": "docker compose --env-file .empty.env --file db-cluster.yaml down",
+    "generate:certs": "./scripts/certs.generate.sh",
+    "prebuild": "npm run clean",
+    "logs": "docker logs -f app"
   },
   "dependencies": {
     "@prisma/client": "^4.13.0",
@@ -20,6 +28,7 @@
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "morgan": "^1.10.0",
+    "trpc-playground": "^1.0.4",
     "zod": "^3.21.4"
   },
   "devDependencies": {
@@ -32,12 +41,15 @@
     "@types/morgan": "^1.9.4",
     "@types/node": "^18.15.13",
     "@typescript-eslint/eslint-plugin": "^5.59.0",
+    "@typescript-eslint/parser": "^5.58.0",
     "cross-env": "^7.0.3",
     "esbuild": "^0.17.17",
     "eslint": "^8.38.0",
     "nodemon": "^2.0.22",
     "prettier": "^2.8.7",
     "prisma": "^4.13.0",
-    "typescript": "^5.0.4"
+    "rimraf": "^5.0.0",
+    "typescript": "^5.0.4",
+    "jsonwebtoken": "^9.0.0"
   }
 }
