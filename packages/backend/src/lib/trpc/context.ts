@@ -1,10 +1,6 @@
+import { Session } from '@prisma/client';
 import { inferAsyncReturnType } from '@trpc/server';
 import { CreateExpressContextOptions } from '@trpc/server/adapters/express';
-// import { Session } from '@prisma/client';
-type Session = {
-  id: string;
-  userId: string;
-};
 type TRPCContext = Partial<{
   session: Session;
   token: string;
