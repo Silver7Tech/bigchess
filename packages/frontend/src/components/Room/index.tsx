@@ -1,5 +1,6 @@
 import React from 'react'
 import { Chessboard } from "react-chessboard";
+import { Button, Input } from '../UI';
 const Room: React.FC = () => {
     return (
         <div className='flex'>
@@ -14,11 +15,8 @@ const Room: React.FC = () => {
                     Chat
                 </p>
                 <div className='absolute w-full bottom-4 flex justify-between h-100 flex px-2 gap-2'>
-                    <div className='w-8/12 border border-black h-[40px]'>
-                    </div>
-                    <div className='w-4/12 bg-fuchsia-500 h-[40px]'>
-
-                    </div>
+                    <Input className='w-8/12 border-black h-[40px]'/>
+                    <Button text='Send' bg_color='#d946ef' className= 'w-4/12 h-[40px]' />
                 </div>
             </div>
             <div className='w-3/12'></div>
