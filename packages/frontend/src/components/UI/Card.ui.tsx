@@ -10,7 +10,7 @@ export interface CardProps{
 export const Card: React.FC<CardProps>  = ({ text, button='Button' }: CardProps) =>{
     const navigate = useNavigate()
     const gotoRoom = () => {     
-        navigate('/room')
+        navigate('/play')
     }
     return(
         <div className='relative min-w-[400px] min-h-[500px] bg-cyan-300'>
