@@ -42,7 +42,7 @@ const Header: FC = () => {
       </div>
       <div className='flex items-center'>
         <Button
-          text='Register'
+          text='Login'
           px='px-[8px]'
           py='py-[4px]'
           bg_color='bg-purple-100'
