@@ -14,6 +14,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({isModalOpen, closeModal}:Au
             overlayClassName="fixed inset-0 bg-gray-500 bg-opacity-75 flex justify-center items-center z-50"
             >
             <LoginModal/>
+            
         </Modal>
     )
 }
