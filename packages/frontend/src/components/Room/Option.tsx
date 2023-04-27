@@ -1,5 +1,5 @@
 import React from 'react'
-import { Input, Button } from '@/components/UI'
+import { Button } from '@/components/UI'
 import { ModeItem } from '@/components/UI/ModeItem.ui';
 import { TimeItem } from '@/components/UI/TimeItem.ui';
 import { ModeItem_1,ModeItem_2,ModeItem_3,ModeItem_4 } from '@/components/UI/SVG_ICONS';
