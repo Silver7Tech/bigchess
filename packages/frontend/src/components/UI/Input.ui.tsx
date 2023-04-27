@@ -5,17 +5,20 @@ export interface InputProps {
     rounded?: string,
     bg_color?:  string,
     text_color?: string,
+    placeholder? : string,
+    width?: string,
 }
-export const Input : React.FC<InputProps> = ({className = '', border = 'border', bg_color = 'ffffff', text_color = '#000000',rounded = 'rounded-md'}:InputProps) => {
-    const classes = `${border} ${className} ${rounded}`
+export const Input : React.FC<InputProps> = ({className = '', border = 'border', bg_color = 'ffffff', text_color = '#000000', rounded = 'rounded-md', width, placeholder}:InputProps) => {
+    const classes = `${border} ${rounded} ${width} ${className} `
     return (
         <input
             className={classes}
             style={{
                 backgroundColor: bg_color,
                 color: text_color,
-                padding: `2px 3px`
+                padding: `4px 3px`
             }}
+            placeholder={placeholder}
         />
         
     )

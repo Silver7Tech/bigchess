@@ -1,25 +1,28 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Chessboard } from "react-chessboard";
-import { Button, Input } from '../UI';
+import { ChatRoom } from '@/components/Room/ChatRoom';
+import { Option } from '@/components/Room/Option';
 const Room: React.FC = () => {
+    const [ isPlaying, setIsPlaying ] = useState(true)    
     return (
-        <div className='flex'>
-            <div className='w-3/12'></div>
-            <div className='w-4/12'>
+        <div className='grid grid-cols-12 place-content-center'>
+            <div className={isPlaying ? 'col-span-2' : 'col-span-3'}/>
+            {
+                isPlaying &&
+                    <ChatRoom/>
+
+            }
+           
+            <div className='col-span-4'>
                 <Chessboard 
                     id="BasicBoard" 
+                    customDarkSquareStyle={{ backgroundColor: "#B7C0D8" }}
+                    customLightSquareStyle={{ backgroundColor: "#E8EDF9" }}
                 />
             </div>
-            <div className='relative w-2/12 border border-sky-600 mx-2 bg-orange-100'>
-                <p className='w-full px-4 bg-orange-300	'>
-                    Chat
-                </p>
-                <div className='absolute w-full bottom-4 flex justify-between h-100 flex px-2 gap-2'>
-                    <Input className='w-8/12 border-black h-[40px]'/>
-                    <Button text='Send' bg_color='#d946ef' className= 'w-4/12 h-[40px]' />
-                </div>
-            </div>
-            <div className='w-3/12'></div>
+            <Option/>
+            <div className={isPlaying ? 'col-span-2' : 'col-span-3'}/>
+           
 
         </div>
     )
