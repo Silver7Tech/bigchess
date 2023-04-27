@@ -7,7 +7,7 @@ export interface AuthModalProps{
     closeModal: () => void,
 }
 export const AuthModal: React.FC<AuthModalProps> = ({isModalOpen, closeModal}:AuthModalProps) =>{
-    const login_flag = false;
+    const login_flag = true;
     return (
         <Modal
             isOpen={isModalOpen}
