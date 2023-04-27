@@ -1,6 +1,6 @@
 import React from 'react'
-import { Image, Input, Button } from '../../UI/index.ts'
-import Logo from '../../../assets/img/logo_large.png'
+import { Image, Input, Button } from '@/components/UI'
+import Logo from '@/assets/img/logo_large.png'
 import { FaGoogle, FaTwitter } from 'react-icons/fa'
 export const RegisterModal: React.FC = () =>{
     return (

@@ -1,9 +1,9 @@
 import { FC, useState } from 'react';
-import { Button, Image } from './UI';
-import Logo  from  '../assets/img/logo.png';
+import { Button, Image } from '@/components/UI';
+import Logo  from  '@/assets/img/logo.png';
 import { useLocation } from 'react-router-dom';
-import { LinkButton } from './UI/LinkButton.ui';
-import { AuthModal } from './Modal/Auth';
+import { LinkButton } from '@/components/UI/LinkButton.ui';
+import { AuthModal } from '@/components/Modal/Auth';
 const Header: FC = () => {
   const {pathname} = useLocation()
   const [isModalOpen, setIsModalOpen] = useState(false);

@@ -1,8 +1,7 @@
 import React, { useState } from 'react'
 import { Chessboard } from "react-chessboard";
-import { Button, Input } from '../UI';
-import { ChatRoom } from './ChatRoom';
-import { Option } from './Option';
+import { ChatRoom } from '@/components/Room/ChatRoom';
+import { Option } from '@/components/Room/Option';
 const Room: React.FC = () => {
     const [ isPlaying, setIsPlaying ] = useState(true)    
     return (

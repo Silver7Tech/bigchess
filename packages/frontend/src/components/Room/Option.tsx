@@ -1,9 +1,9 @@
 import React from 'react'
-import { Input, Button } from '../UI'
-import { ModeItem } from '../UI/ModeItem.ui';
-import { TimeItem } from '../UI/TimeItem.ui';
-import { ModeItem_1,ModeItem_2,ModeItem_3,ModeItem_4 } from '../UI/SVG_ICONS';
-export const Option = () => {
+import { Input, Button } from '@/components/UI'
+import { ModeItem } from '@/components/UI/ModeItem.ui';
+import { TimeItem } from '@/components/UI/TimeItem.ui';
+import { ModeItem_1,ModeItem_2,ModeItem_3,ModeItem_4 } from '@/components/UI/SVG_ICONS';
+export const Option : React.FC = () => {
     return(
         <div className='relative col-span-2 border border-sky-600 mx-2 bg-orange-100'>
             <div className='w-full flex justify-between px-4 py-4 bg-orange-300 border-b text-bold '>

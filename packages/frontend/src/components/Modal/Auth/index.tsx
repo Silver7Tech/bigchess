@@ -1,7 +1,7 @@
 import React from 'react'
 import Modal from 'react-modal'
-import { LoginModal } from './Login'
-import { RegisterModal } from './Register'
+import { LoginModal } from '@/components/Modal/Auth/Login'
+import { RegisterModal } from '@/components/Modal/Auth/Register'
 export interface AuthModalProps{
     isModalOpen: boolean,
     closeModal: () => void,

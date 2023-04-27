@@ -1,7 +1,7 @@
 import React from 'react'
-import { Image, Input, Button } from '../../UI/index.ts'
-import Logo from '../../../assets/img/logo_large.png'
 import { FaGoogle, FaTwitter } from 'react-icons/fa'
+import { Image, Input, Button } from '@/components/UI/index.ts'
+import Logo from '@/assets/img/logo_large.png'
 export const LoginModal: React.FC = () =>{
     return (
         <div className="relative w-full h-full bg-white-100 outline-none px-4 py-3">
