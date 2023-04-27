@@ -13,7 +13,7 @@ export const RegisterModal: React.FC = () =>{
                     <Input placeholder='Username or Email address'/>
                     <Button text='Continue'bg_color='bg-purple-100' text_color='text-white-100'/>
                 </div>
-                <p className='text-base'>Already have an account? <span>Log in</span></p>
+                <p className='text-base'>Already have an account? <span className='text-purple-100 cursor-pointer hover:underline'>Log in</span></p>
                 <div className='flex items-center w-full'>
                     <div className='flex h-[1px] bg-gray-400 w-full'></div>
                     <div className='px-2 text-gray-500'>OR</div>
