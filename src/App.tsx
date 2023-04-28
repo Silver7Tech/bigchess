@@ -6,7 +6,6 @@ function App() {
   // const Home = lazy(() => import('./components/Home'));
   const Room = lazy(() => import('./components/Room'));
   const GameMode = lazy(() => import('./components/GameMode'));
-  console.log('here is app')
   return (
     <div className="min-h-screen flex flex-col">
       <Header/>
