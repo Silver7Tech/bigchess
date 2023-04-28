@@ -1,5 +1,4 @@
 import React from 'react'
-import { Input, Button } from '@/components/UI'
 export const GamePool: React.FC = () => {
     return(
         <div className='relative col-span-2 border border-sky-600 mx-2 bg-orange-100'>
