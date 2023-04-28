@@ -1,28 +1,28 @@
-import React from 'react'
-import Modal from 'react-modal'
+import React, {useContext} from 'react'
+import * as Dialog from '@radix-ui/react-dialog';
+import { Cross2Icon } from '@radix-ui/react-icons';
 import { LoginModal } from '@/components/Modal/Auth/Login'
 import { RegisterModal } from '@/components/Modal/Auth/Register'
-export interface AuthModalProps{
-    isModalOpen: boolean,
-    closeModal: () => void,
-}
-export const AuthModal: React.FC<AuthModalProps> = ({isModalOpen, closeModal}:AuthModalProps) =>{
-    const login_flag = true;
+import { StateContext } from '@/Provider';
+import './styles.css';
+
+export const AuthModal: React.FC = () =>{
+    const {
+        userState,
+    } = useContext(StateContext)
     return (
-        <Modal
-            isOpen={isModalOpen}
-            onRequestClose={closeModal}
-            className="w-1/4 h-2/3 mx-auto my-6 rounded-md overflow-hidden"
-            overlayClassName="fixed inset-0 bg-gray-500 bg-opacity-75 flex justify-center items-center z-50"
-            >
+        <Dialog.Portal className=''>
+            <Dialog.Overlay className="DialogOverlay bg-gray-500 bg-opacity-75 z-50" />
+            <Dialog.Content className="DialogContent z-50">
                 {
-                    login_flag
+                    userState 
                     ?
-                    <LoginModal/>
-                    :
                     <RegisterModal/>
+                    :
+                    <LoginModal/>
                 }
-            
-        </Modal>
+                
+            </Dialog.Content>
+        </Dialog.Portal>
     )
 }
