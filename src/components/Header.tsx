@@ -5,6 +5,7 @@ import { LinkButton } from "@/components/UI/LinkButton.ui";
 import * as Dialog from "@radix-ui/react-dialog";
 import { FC, useState } from "react";
 import { useLocation } from "react-router-dom";
+import { HashLink } from "react-router-hash-link";
 // import './Modal/Auth/styles.css';
 const Header: FC = () => {
   const { pathname } = useLocation();
@@ -14,10 +15,12 @@ const Header: FC = () => {
   };
   return (
     <div className="lg:py-5 py-2 px-2 lg:px-5 bg-brand-800 sticky top-0 flex justify-between max-lg:text-sm z-50 border">
-      <div className="flex justify-center items-center">
-        <Image source={Logo} />
-        <p className="font-libre font-Libre text-2xl ml-2">BigChess</p>
-      </div>
+      <HashLink to={"/"}>
+        <div className="flex justify-center items-center">
+          <Image source={Logo} />
+          <p className="font-libre font-Libre text-2xl ml-2">BigChess</p>
+        </div>
+      </HashLink>
       <div>
         <nav className="absolute top-1/2  transform -translate-x-1/2 -translate-y-1/2">
           <ul className="flex items-center space-x-8">
