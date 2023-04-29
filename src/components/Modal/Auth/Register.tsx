@@ -10,7 +10,7 @@ export const RegisterModal: React.FC = () => {
   return (
     <div className="relative w-full h-full bg-white-100 outline-none px-6 py-[15px] rounded-2xl">
       <div className="flex flex-col justify-center items-center gap-2">
-        <div className="flex justify-center my-12">
+        <div className="flex justify-center">
           <Image source={Logo} />
         </div>
         <div className="flex flex-col w-full my-2 gap-4">

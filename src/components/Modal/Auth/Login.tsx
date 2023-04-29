@@ -13,7 +13,7 @@ export const LoginModal: React.FC = () => {
         <div className="flex justify-center">
           <Image source={Logo} />
         </div>
-        <div className="flex flex-col w-full gap-4">
+        <div className="flex flex-col w-full my-2 gap-4">
           <Input type="email" placeholder="Email address" height="h-12" />
           <Button
             text="Continue"

@@ -1,7 +1,8 @@
 import { useAppState } from "@/providers/StateProvider";
 import React from "react";
+import { Image } from './Image.ui';
 export interface ModeItemProps {
-  SVG: React.ReactNode;
+  SVG: string;
   activated?: boolean;
   mode_number: number;
 }
@@ -21,7 +22,7 @@ export const ModeItem: React.FC<ModeItemProps> = ({
       } cursor-pointer ${activated ? "bg-red-100" : "bg-white"}`}
       onClick={() => setGameMode(mode_number)}
     >
-      {SVG}
+      <Image source = {SVG} />
     </div>
   );
 };

@@ -33,8 +33,8 @@ export const StateContextProvider: React.FC<{
 }> = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, {
     userState: false,
-    gameMode: 1,
-    timeMode: 1,
+    gameMode: 0,
+    timeMode: 0,
   });
 
   return (
