@@ -8,7 +8,7 @@ export interface LinkButtonProps{
     actived?: boolean
 }
 
-export const LinkButton:React.FC<LinkButtonProps> = forwardRef(({ text, to, actived=false }: LinkButtonProps) => {
+export const LinkButton:React.FC<LinkButtonProps> = forwardRef(( { text, to, actived=false }: LinkButtonProps, ref) => {
     return(
         <HashLink 
             to={to} 

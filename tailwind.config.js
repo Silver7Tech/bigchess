@@ -38,6 +38,9 @@ export default {
         400:'#9ca3af',
         500: '#6b7280'
       },
+      green: {
+        100: '#1BC47D'
+      },
       blue: {
         100: '#1D9BF0'
       },
