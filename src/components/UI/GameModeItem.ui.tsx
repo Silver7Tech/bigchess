@@ -1,5 +1,3 @@
-import React from 'react'
-
 export interface GameModeItemProps{
     text: string,
     icon?: React.ReactNode,

@@ -1,4 +1,4 @@
-import React, { useContext, useReducer } from "react";
+import { useContext, useReducer } from "react";
 import { createContext } from "react";
 import { StateActions } from "./actions";
 import { StateActionsInterface, StateContextInterface } from "./interfaces";

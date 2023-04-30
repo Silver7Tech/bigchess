@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { Logo, Button, Card } from '@/components/UI';
+import { Logo, Button, Card } from '~/components/UI';
 
 const cards = ['Quick Play', 'Computer', 'Friend']
 const Home: FC = () => {

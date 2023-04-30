@@ -1,5 +1,5 @@
-import React from "react";
-import { Input, Button } from "@/components/UI";
+
+import { Input, Button } from "~/components/UI";
 export const ChatRoom: React.FC = () => {
   return (
     <div className="relative col-span-2 border border-sky-600 mx-2 bg-orange-100">

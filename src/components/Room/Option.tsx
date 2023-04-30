@@ -1,11 +1,9 @@
-import { Button } from "@/components/UI";
-import { ModeItem } from "@/components/UI/ModeItem.ui";
-import gameModeData from '@/assets/game_modes.json';
-import timeModeData from '@/assets/time_modes.json';
-import { TimeItem } from "@/components/UI/TimeItem.ui";
-import { useAppState } from "@/providers/StateProvider";
-import React from "react";
-console.log(gameModeData)
+import { Button } from "~/components/UI";
+import { ModeItem } from "~/components/UI/ModeItem.ui";
+import gameModeData from "~/assets/game_modes.json";
+import timeModeData from "~/assets/time_modes.json";
+import { TimeItem } from "~/components/UI/TimeItem.ui";
+import { useAppState } from "~/providers/StateProvider";
 export interface OptionInterface {
   isPlaying: boolean;
 }
@@ -29,31 +27,31 @@ export const Option: React.FC<OptionInterface> = ({
         <div className="flex flex-col">
           <p className="font-bold">Game Mode:</p>
           <div className="flex gap-1">
-            {
-              gameModeData.map((mode, index) => {
-                return (
-                  <ModeItem
-                    key={index}
-                    activated={gameMode === index ? true : false}
-                    mode_number={index}
-                    SVG={mode.mode}
-                  />
-                )
-              })
-            }
+            {gameModeData.map((mode, index) => {
+              return (
+                <ModeItem
+                  key={index}
+                  activated={gameMode === index ? true : false}
+                  mode_number={index}
+                  SVG={mode.mode}
+                />
+              );
+            })}
           </div>
         </div>
 
         <div className="flex flex-col mt-8">
           <p className="font-bold">Time:</p>
           <div className="flex gap-2 justify-center">
-            {
-              timeModeData.map((time, index) => {
-                return (
-                  <TimeItem time={time.time} time_mode={index} activated={timeMode === index ? true : false} />    
-                )
-              })
-            }
+            {timeModeData.map((time, index) => {
+              return (
+                <TimeItem
+                  time={time.time}
+                  time_mode={index}
+                  activated={timeMode === index ? true : false}
+                />
+              );
+            })}
           </div>
         </div>
         <div className="flex flex-col mt-6 gap-2">

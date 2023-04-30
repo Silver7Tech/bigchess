@@ -1,5 +1,3 @@
-import React from 'react'
-
 export interface ImageProps{
     source: string,
     bg_color?: string ,

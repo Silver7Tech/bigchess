@@ -1,7 +1,7 @@
-import Logo from "@/assets/img/logo.png";
-import { AuthModal } from "@/components/Modal/Auth";
-import { Button, Image } from "@/components/UI";
-import { LinkButton } from "@/components/UI/LinkButton.ui";
+import Logo from "~/assets/img/logo.png";
+import { AuthModal } from "~/components/Modal/Auth";
+import { Button, Image } from "~/components/UI";
+import { LinkButton } from "~/components/UI/LinkButton.ui";
 import * as Dialog from "@radix-ui/react-dialog";
 import { FC, useState } from "react";
 import { useLocation } from "react-router-dom";

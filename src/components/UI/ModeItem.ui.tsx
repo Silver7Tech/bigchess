@@ -1,6 +1,5 @@
-import { useAppState } from "@/providers/StateProvider";
-import React from "react";
-import { Image } from './Image.ui';
+import { useAppState } from "~/providers/StateProvider";
+import { Image } from "./Image.ui";
 export interface ModeItemProps {
   SVG: string;
   activated?: boolean;
@@ -22,7 +21,7 @@ export const ModeItem: React.FC<ModeItemProps> = ({
       } cursor-pointer ${activated ? "bg-red-100" : "bg-white"}`}
       onClick={() => setGameMode(mode_number)}
     >
-      <Image source = {SVG} />
+      <Image source={SVG} />
     </div>
   );
 };

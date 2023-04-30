@@ -1,5 +1,4 @@
-import React from 'react'
-import { ModeItem } from '@/interfaces'
+import { ModeItem } from '~/interfaces'
 export const ModeItem_3: React.FC<ModeItem> = ({fill='#000000'}: ModeItem) => {
     return(
         <svg width="29" height="29" viewBox="0 0 29 29" fill="none" xmlns="http://www.w3.org/2000/svg">
