@@ -1,4 +1,4 @@
-import { useAppState } from "~/providers/StateProvider";
+import { useAppState } from "~/providers/StateProvider/StateProvider";
 
 export interface TimeItemProps {
   time: React.ReactNode;

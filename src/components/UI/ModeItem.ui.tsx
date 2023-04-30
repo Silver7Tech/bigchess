@@ -1,4 +1,4 @@
-import { useAppState } from "~/providers/StateProvider";
+import { useAppState } from "~/providers/StateProvider/StateProvider";
 import { Image } from "./Image.ui";
 export interface ModeItemProps {
   SVG: string;

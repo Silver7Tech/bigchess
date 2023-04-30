@@ -1,6 +1,6 @@
 import Logo from "~/assets/img/logo_large.png";
 import { Button, Image, Input } from "~/components/UI";
-import { useAppState } from "~/providers/StateProvider";
+import { useAppState } from "~/providers/StateProvider/StateProvider";
 import { FaGoogle, FaTwitter } from "react-icons/fa";
 export const RegisterModal: React.FC = () => {
   const {

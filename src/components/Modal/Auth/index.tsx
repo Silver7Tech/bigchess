@@ -1,6 +1,6 @@
 import { LoginModal } from "~/components/Modal/Auth/Login";
 import { RegisterModal } from "~/components/Modal/Auth/Register";
-import { useAppState } from "~/providers/StateProvider";
+import { useAppState } from "~/providers/StateProvider/StateProvider";
 import { Content, Overlay, Portal } from "@radix-ui/react-dialog";
 import "./styles.css";
 
