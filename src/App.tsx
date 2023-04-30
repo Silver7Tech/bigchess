@@ -1,25 +1,33 @@
-import { lazy, Suspense } from "react";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { lazy, Suspense, useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import Header from "~/components/Header";
+import { AuthProvider } from "./providers/AuthProvider";
+
 // import Room from './components/Room';
 function App() {
   // const Home = lazy(() => import('./components/Home'));
   const Room = lazy(() => import("./components/Room"));
   const GameMode = lazy(() => import("./components/GameMode"));
+  const [queryClient] = useState(() => new QueryClient());
   return (
-    <div className="min-h-screen flex flex-col">
-      <Header />
-      <Suspense fallback={<div>Loading...</div>}>
-        <div className="my-auto">
-          <Routes>
-            <Route path="/" element={<Room isPlaying={false} />} />
-            <Route path="/play" element={<Room isPlaying={true} />} />
-            <Route path="/mode" element={<GameMode />} />
-            {/* <Route path="/*" element={<Navigate to="/" />} /> */}
-          </Routes>
+    <QueryClientProvider client={queryClient}>
+      <AuthProvider>
+        <div className="min-h-screen flex flex-col">
+          <Header />
+          <Suspense fallback={<div>Loading...</div>}>
+            <div className="my-auto">
+              <Routes>
+                <Route path="/" element={<Room isPlaying={false} />} />
+                <Route path="/play" element={<Room isPlaying={true} />} />
+                <Route path="/mode" element={<GameMode />} />
+                {/* <Route path="/*" element={<Navigate to="/" />} /> */}
+              </Routes>
+            </div>
+          </Suspense>
         </div>
-      </Suspense>
-    </div>
+      </AuthProvider>
+    </QueryClientProvider>
   );
 }
 
