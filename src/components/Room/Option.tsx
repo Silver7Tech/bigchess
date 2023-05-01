@@ -3,7 +3,7 @@ import { ModeItem } from "~/components/UI/ModeItem.ui";
 import gameModeData from "~/assets/game_modes.json";
 import timeModeData from "~/assets/time_modes.json";
 import { TimeItem } from "~/components/UI/TimeItem.ui";
-import { useAppState } from "~/providers/StateProvider";
+import { useAppState } from "~/providers/StateProvider/StateProvider";
 export interface OptionInterface {
   isPlaying: boolean;
 }

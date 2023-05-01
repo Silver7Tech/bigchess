@@ -1,75 +1,67 @@
-import Logo from '~/assets/img/logo_large.png';
-import { Button, Image, Input } from '~/components/UI/index.ts';
-import { useAppState } from '~/providers/StateProvider/StateProvider';
-import { FaGoogle, FaTwitter } from 'react-icons/fa';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useForm } from 'react-hook-form';
-import * as Yup from 'yup';
 import { useMutation } from '@tanstack/react-query';
+import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
+import * as Yup from 'yup';
+import Logo from '~/assets/img/logo_large.png';
+import { Button, Image, Input } from '~/components/UI';
 import { trpc } from '~/helpers/trpc';
+import { useAuth } from '~/providers/AuthProvider';
+import { useAppState } from '~/providers/StateProvider/StateProvider';
 const schema = Yup.object({
-  email: Yup.string().email().required('Please provide a valid email'),
+  code: Yup.string()
+    .length(6)
+    .matches(/\d{6}/, { message: 'Provide digits only!' })
+    .required('Please provide a valid OTP'),
 });
-export const LoginModal: React.FC = () => {
+export const ValidateOTPModal: React.FC = () => {
+  const navigate = useNavigate();
+  const { getUser } = useAuth();
   const { actions } = useAppState();
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<{ email: string }>({
+  const { register, handleSubmit, formState } = useForm({
     resolver: yupResolver(schema),
     defaultValues: {
-      email: '',
+      code: '',
     },
   });
 
   const { mutate } = useMutation({
-    mutationFn: async (data: { email: string }) => await trpc.mutation('auth.login', data),
-    onSuccess: (data) => {
-      localStorage.setItem('token', (data as { token: string }).token);
-
-      // go to next step here -> show dialog with code input for 6 characters
-      actions.setLoginState('validate');
-    },
-    onError: (_error) => {
-      // show error message in toast
+    mutationFn: async (data: { code: string }) => await trpc.mutation('auth.verifyOTP', data),
+    onSuccess: () => {
+      actions.setOpenModal(false);
+      getUser();
+      navigate('/');
     },
   });
 
-  function onSubmit(data: { email: string }) {
-    // make sure to remove previous token
-    localStorage.removeItem('token');
+  function onSubmit(data: { code: string }) {
     mutate(data);
   }
   return (
     <div className="relative w-full h-full bg-white-100 outline-none px-6 py-[15px] rounded-2xl">
       <div className="flex flex-col justify-center items-center gap-2">
-        <div className="flex justify-center mb-8">
+        <div className="flex justify-center">
           <Image source={Logo} />
         </div>
         <form onSubmit={handleSubmit(onSubmit)} className="w-full">
           <div className="flex flex-col w-full my-2 gap-4">
             <Input
-              {...register('email')}
-              error={errors.email?.message}
-              placeholder="Email address"
+              {...register('code')}
+              error={formState.errors.code?.message}
+              maxLength={6}
+              placeholder="6 digit code you received"
               height="h-12"
             />
             <Button
               type="submit"
               text="Continue"
               bg_color="bg-purple-100"
-              height="h-12"
               text_color="text-white-100"
+              height="h-12"
             />
           </div>
         </form>
-        <div className="flex items-center w-full my-[35px]">
-          <div className="flex h-[1px] bg-gray-400 w-full"></div>
-          <div className="px-2 text-gray-500">OR</div>
-          <div className="flex h-[1px] bg-gray-400 w-full"></div>
-        </div>
-        <div className="flex flex-col gap-4 w-full">
+        {/* <div className="flex flex-col gap-4 w-full">
           <Button
             text="Continue with Google"
             icon={<FaGoogle fill="grey" />}
@@ -87,7 +79,7 @@ export const LoginModal: React.FC = () => {
             text_color="text-white-100"
             className="inline-flex items-center justify-center"
           />
-        </div>
+        </div> */}
       </div>
     </div>
   );
