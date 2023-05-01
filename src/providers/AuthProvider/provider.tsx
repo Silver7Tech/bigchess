@@ -64,7 +64,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
     data: user,
     refetch,
     isLoading,
-  } = useTrpcQuery<{}, PublicSession>("auth.me", {});
+  } = useTrpcQuery<any, PublicSession>("auth.me", {});
 
   const { mutate } = useMutation({
     mutationFn() {
