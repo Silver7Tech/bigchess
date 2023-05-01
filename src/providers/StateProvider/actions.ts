@@ -1,19 +1,25 @@
 export interface SetPlayerStateAction {
-  type: "SET_PLAYER_STATE";
-  payload: boolean;
+  type: 'SET_LOGIN_STATE';
+  payload: 'login' | 'validate' | 'logout' | undefined;
 }
 
 export interface SetGameModeAction {
-  type: "SET_GAME_MODE";
+  type: 'SET_GAME_MODE';
   payload: number;
 }
 
 export interface SetTimeModeAction {
-  type: "SET_TIME_MODE";
+  type: 'SET_TIME_MODE';
   payload: number;
+}
+
+export interface SetOpenModalAction {
+  type: 'SET_MODAL_OPEN';
+  payload: boolean;
 }
 
 export type StateActions =
   | SetPlayerStateAction
   | SetGameModeAction
-  | SetTimeModeAction;
+  | SetTimeModeAction
+  | SetOpenModalAction;

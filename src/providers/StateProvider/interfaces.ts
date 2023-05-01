@@ -1,11 +1,13 @@
 export interface StateContextInterface {
-  userState: boolean | undefined;
+  loginState?: 'login' | 'validate' | 'logout' | undefined;
+  modalOpen: boolean;
   gameMode: number | undefined;
   timeMode: number | undefined;
 }
 
 export interface StateActionsInterface {
-  setUserState: (state: boolean) => void;
+  setLoginState: (state: StateContextInterface['loginState']) => void;
   setGameMode: (state: number) => void;
   setTimeMode: (state: number) => void;
+  setOpenModal: (state: boolean) => void;
 }
