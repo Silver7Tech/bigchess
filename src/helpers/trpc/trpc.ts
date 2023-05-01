@@ -5,11 +5,6 @@ const trpcLink = httpLink({
   url: `${apiPrefix}/trpc`,
   headers() {
     const token = localStorage.getItem("token");
-
-    // if (window.location.pathname === '/login') {
-    //   token = null
-    // }
-
     return token
       ? {
           Authorization: `Bearer ${token}`,
