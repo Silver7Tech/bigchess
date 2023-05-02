@@ -8,6 +8,8 @@ import { Button, Image } from '~/components/UI';
 import { LinkButton } from '~/components/UI/LinkButton.ui';
 import { useAuth } from '~/providers/AuthProvider';
 import { useAppState } from '~/providers/StateProvider/StateProvider';
+import {FaChevronDown} from 'react-icons/fa';
+import User from '~/assets/img/user.png';
 // import './Modal/Auth/styles.css';
 const Header: FC = () => {
   const { pathname } = useLocation();
@@ -18,9 +20,6 @@ const Header: FC = () => {
     actions.setOpenModal(true);
   };
 
-  const openProfile = () => {
-    // TODO: navigate to profile page
-  };
   return (
     <div className="lg:py-5 py-2 px-2 lg:px-5 bg-brand-800 sticky top-0 flex justify-between max-lg:text-sm z-50 border">
       <HashLink to={'/'}>
@@ -47,17 +46,19 @@ const Header: FC = () => {
       <div className="flex items-center">
         <div>
           {isAuthenticated() ? (
-            <div>
+            <div className='flex items-center'>
+              <div className="flex items-center gap-2 border-2 rounded-l-2xl h-[48px] px-2">
+              <div className="font-bold text-purple-100">$<span>120.00</span></div>
+              <HashLink to={'/profile'}><Image source={User}/></HashLink>
+              <FaChevronDown />
+              </div>
               <Button
-                text="Profile"
-                px="px-[16px]"
-                py="py-[16px]"
-                width="w-[75px]"
-                height="w-[52px]"
-                rounded="rounded-[16.6px]"
+                text="Deposit"
+                width="w-[91px]"
+                height="h-[48px]"
+                rounded="rounded-r-2xl"
                 bg_color="bg-green-100"
                 text_color="text-white-100"
-                onClick={openProfile}
               />
             </div>
           ) : (

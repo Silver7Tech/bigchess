@@ -25,13 +25,13 @@ export const LoginModal: React.FC = () => {
 
   const { mutate } = useMutation({
     mutationFn: async (data: { email: string }) => await trpc.mutation('auth.login', data),
-    onSuccess: (data) => {
+    onSuccess: (data: any) => {
       localStorage.setItem('token', (data as { token: string }).token);
 
       // go to next step here -> show dialog with code input for 6 characters
       actions.setLoginState('validate');
     },
-    onError: (_error) => {
+    onError: (_error: any) => {
       // show error message in toast
     },
   });
