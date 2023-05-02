@@ -5,8 +5,11 @@ import React from "react";
 import { FaGoogle, FaTwitter } from "react-icons/fa";
 export const LoginModal: React.FC = () => {
   const {
-    actions: { setUserState },
+    actions: { setUserState, setLoginState },
   } = useAppState();
+  const actionLogin = () => {
+    setLoginState(true);
+  }
   return (
     <div className="relative w-full h-full bg-white-100 outline-none px-6 py-[15px] rounded-2xl">
       <div className="flex flex-col justify-center items-center gap-2">
@@ -20,6 +23,7 @@ export const LoginModal: React.FC = () => {
             bg_color="bg-purple-100"
             height="h-12"
             text_color="text-white-100"
+            onClick={actionLogin}
           />
         </div>
         <p className="text-base font-bold mt-6">

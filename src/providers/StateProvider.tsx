@@ -15,6 +15,11 @@ export const reducer = (state: StateContextInterface, action: StateActions) => {
         ...state,
         userState: action.payload,
       };
+    case "SET_LOGIN_STATE":
+      return {
+        ...state,
+        loginState: action.payload,
+      };
     case "SET_GAME_MODE":
       return {
         ...state,
@@ -33,6 +38,7 @@ export const StateContextProvider: React.FC<{
 }> = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, {
     userState: false,
+    loginState: false,
     gameMode: 0,
     timeMode: 0,
   });
@@ -44,6 +50,8 @@ export const StateContextProvider: React.FC<{
         actions: {
           setUserState: (state: boolean) =>
             dispatch({ type: "SET_PLAYER_STATE", payload: state }),
+          setLoginState: (state: boolean) =>
+            dispatch({ type: "SET_LOGIN_STATE", payload: state }),
           setGameMode: (state: number) =>
             dispatch({ type: "SET_GAME_MODE", payload: state }),
           setTimeMode: (state: number) =>

@@ -1,10 +1,9 @@
 import { lazy, Suspense } from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, Navigate } from 'react-router-dom';
 import Header from '@/components/Header';
-// import Room from './components/Room';
 function App() {
-  // const Home = lazy(() => import('./components/Home'));
   const Room = lazy(() => import('./components/Room'));
+  const Profile = lazy(() => import('./components/Detail/Profile'));
   const GameMode = lazy(() => import('./components/GameMode'));
   return (
     <div className="min-h-screen flex flex-col">
@@ -15,7 +14,8 @@ function App() {
               <Route path="/" element={<Room isPlaying = {false}/>} />
               <Route path="/play" element={<Room isPlaying = {true} />} />
               <Route path="/mode" element={<GameMode/>} />
-              {/* <Route path="/*" element={<Navigate to="/" />} /> */}
+              <Route path="/profile" element={<Profile/>} />
+              <Route path="/*" element={<Navigate to="/" />} />
           </Routes>
         </div>
       </Suspense>

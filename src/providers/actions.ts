@@ -13,7 +13,13 @@ export interface SetTimeModeAction {
   payload: number;
 }
 
+export interface SetLoginStateAction {
+  type: "SET_LOGIN_STATE";
+  payload: boolean;
+}
+
 export type StateActions =
   | SetPlayerStateAction
   | SetGameModeAction
+  | SetLoginStateAction
   | SetTimeModeAction;
