@@ -1,6 +1,6 @@
 module.exports = {
   env: { browser: true, es2020: true },
-  extends: ['react-app', 'plugin:@typescript-eslint/recommended', 'plugin:react-hooks/recommended'],
+  extends: ['react-app', 'plugin:react-hooks/recommended'],
   parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaVersion: 'latest',
@@ -8,7 +8,6 @@ module.exports = {
     project: './tsconfig.json',
   },
   rules: {
-    'react-refresh/only-export-components': 'warn',
     'no-debugger': 'warn',
     'no-console': ['error', { allow: ['warn', 'error', 'info'] }],
     '@typescript-eslint/no-unused-vars': 'error',
