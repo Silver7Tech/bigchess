@@ -14,7 +14,7 @@ type TableProps<T, K extends keyof T> = {
 
 export const Table = <T, K extends keyof T>({ data, columns }: TableProps<T, K>): JSX.Element => {
 return (
-  <table className='w-full'>
+  <table className='w-full max-h-[450px] overflow-auto'>
     <TableHeader columns={columns} />
     <TableRows
       data={data}

@@ -14,10 +14,10 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
-        <div className="min-h-screen flex flex-col">
+        <div className="max-h-screen flex flex-col overflow-hidden">
           <Header />
           <Suspense fallback={<div>Loading...</div>}>
-            <div className="my-auto">
+            <>
               <Routes>
                 <Route path="/" element={<Room isPlaying={false} />} />
                 <Route path="/play" element={<Room isPlaying={true} />} />
@@ -28,7 +28,7 @@ function App() {
                 <Route path="/preferences" element={<Preferences/>} />
                 <Route path="/*" element={<Navigate to="/" />} />
               </Routes>
-            </div>
+            </>
           </Suspense>
         </div>
       </AuthProvider>

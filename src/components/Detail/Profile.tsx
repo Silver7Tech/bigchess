@@ -56,6 +56,27 @@ interface History {
         wager: <h1>$100.00</h1>,
         edit: <Image source={Edit}/> 
     },
+    {
+        type: <div className='flex items-center gap-2'><Image source={ModeItem_1}/><div className='flex flex-col'><p className='font-bold'>Standard</p><p>10 min</p></div></div>,
+        result: <h1>WIN</h1>,
+        opponent:<h1>Olivia Rhye</h1>,
+        wager: <h1>$100.00</h1>,
+        edit: <Image source={Edit}/> 
+    },
+    {
+        type: <div className='flex items-center gap-2'><Image source={ModeItem_1}/><div className='flex flex-col'><p className='font-bold'>Standard</p><p>10 min</p></div></div>,
+        result: <h1>WIN</h1>,
+        opponent:<h1>Olivia Rhye</h1>,
+        wager: <h1>$100.00</h1>,
+        edit: <Image source={Edit}/> 
+    },
+    {
+        type: <div className='flex items-center gap-2'><Image source={ModeItem_1}/><div className='flex flex-col'><p className='font-bold'>Standard</p><p>10 min</p></div></div>,
+        result: <h1>WIN</h1>,
+        opponent:<h1>Olivia Rhye</h1>,
+        wager: <h1>$100.00</h1>,
+        edit: <Image source={Edit}/> 
+    },
   ];
 
   const columns: ColumnDefinitionType<History, keyof History>[] = [
@@ -84,11 +105,11 @@ interface History {
 
 const Profile: React.FC = () => {
     return (
-        <div className='mx-14 mt-2'>
-            <div className= 'fixed top-28'>
+        <div className='flex mt-2'>
+            <div className= 'ml-14'>
                 <SideBar/>
             </div>
-            <div className='relative left-[300px] w-3/4'>
+            <div className='ml-10 pr-14 w-full overflow-y-auto overflow-x-hidden max-h-[83vh]'>
                 <div className='flex items-center gap-6'>
                     <Image source={User}/>
                     <div className='flex flex-col'>

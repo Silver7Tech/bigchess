@@ -21,7 +21,7 @@ const Header: FC = () => {
   };
 
   return (
-    <div className="lg:py-5 py-2 px-2 lg:px-5 bg-brand-800 sticky top-0 flex justify-between max-lg:text-sm z-50 border bg-white-100">
+    <div className="lg:py-5 py-2 px-2 lg:px-5 bg-brand-800 sticky top-0 flex justify-between max-lg:text-sm z-50 border bg-white-100 ">
       <HashLink to={'/'}>
         <div className="flex justify-center items-center">
           <Image source={Logo} />
