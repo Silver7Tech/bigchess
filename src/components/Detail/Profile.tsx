@@ -1,4 +1,3 @@
-import React from 'react'
 import User from '~/assets/img/user_large.png'
 import Edit from '~/assets/img/edit.png'
 import Star from '~/assets/img/Star.png'
@@ -86,7 +85,7 @@ interface History {
 const Profile: React.FC = () => {
     return (
         <div className='mx-14 mt-2'>
-            <div className= 'fixed'>
+            <div className= 'fixed top-28'>
                 <SideBar/>
             </div>
             <div className='relative left-[300px] w-3/4'>

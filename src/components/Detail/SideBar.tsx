@@ -1,7 +1,20 @@
-import React from 'react'
 import { Sidebar, Menu, MenuItem } from 'react-pro-sidebar';
+import { useAppState } from "~/providers/StateProvider/StateProvider";
+import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router'
 
 const SideBar:React.FC = () => {
+    const navigate = useNavigate()
+    const {
+        state: { detailMode },
+        actions: { setDetailMode },
+      } = useAppState();
+    const activeMenu = (order: number) => {
+        setDetailMode(order);
+    }
+    const Logout = () => {
+        navigate('/play')
+    }
     return (
         <Sidebar>
             <Menu  menuItemStyles={{
@@ -13,10 +26,10 @@ const SideBar:React.FC = () => {
                     };
                 },
             }}>
-                <MenuItem active={true}> Profile </MenuItem>
-                <MenuItem> Deposit Money </MenuItem>
-                <MenuItem> Preferences </MenuItem>
-                <MenuItem> Logout </MenuItem>
+                <MenuItem active={detailMode === 0 ? true : false} component={<Link to="/profile" />} onClick={() => activeMenu(0)}> Profile </MenuItem>
+                <MenuItem active={detailMode === 1 ? true : false} component={<Link to="/deposit" />} onClick={() => activeMenu(1)}>Deposit Money </MenuItem>
+                <MenuItem active={detailMode === 2 ? true : false} component={<Link to="/preferences" />} onClick={() => activeMenu(2)}> Preferences </MenuItem>
+                <MenuItem active={detailMode === 3 ? true : false} onClick={Logout}> Logout </MenuItem>
             </Menu>
         </Sidebar>
     )

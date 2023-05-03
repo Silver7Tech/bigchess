@@ -38,7 +38,7 @@ const Header: FC = () => {
               <LinkButton text="Game Modes" to="/mode" actived={pathname.includes('mode')} />
             </li>
             <li>
-              <LinkButton text="Learderboard" to="/board" actived={pathname.includes('board')} />
+              <LinkButton text="Leaderboard" to="/leaderboard" actived={pathname.includes('board')} />
             </li>
           </ul>
         </nav>
