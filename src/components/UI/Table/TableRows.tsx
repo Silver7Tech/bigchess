@@ -11,7 +11,7 @@ const TableRows = <T, K extends keyof T>({ data, columns }: TableRowsProps<T, K>
         {columns.map((column, index2) => {
           return (
             <td key={`cell-${index2}`} className={`${index2 === 0 ? 'pl-4' : ''}`}>
-              {`${row[column.key]}`}
+              {row[column.key] as any}
             </td>
           );
         })}

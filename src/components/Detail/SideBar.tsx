@@ -1,10 +1,9 @@
 import { Sidebar, Menu, MenuItem } from 'react-pro-sidebar';
 import { useAppState } from "~/providers/StateProvider/StateProvider";
 import { Link } from 'react-router-dom';
-import { useNavigate } from 'react-router'
-
+import { useAuth } from '~/providers/AuthProvider';
 const SideBar:React.FC = () => {
-    const navigate = useNavigate()
+    const { signOut } = useAuth()
     const {
         state: { detailMode },
         actions: { setDetailMode },
@@ -13,7 +12,7 @@ const SideBar:React.FC = () => {
         setDetailMode(order);
     }
     const Logout = () => {
-        navigate('/play')
+        signOut()
     }
     return (
         <Sidebar>

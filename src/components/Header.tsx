@@ -1,6 +1,7 @@
 import * as Dialog from '@radix-ui/react-dialog';
 import { FC } from 'react';
 import { useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router'
 import { HashLink } from 'react-router-hash-link';
 import Logo from '~/assets/img/logo.png';
 import { AuthModal } from '~/components/Modal/Auth';
@@ -8,18 +9,24 @@ import { Button, Image } from '~/components/UI';
 import { LinkButton } from '~/components/UI/LinkButton.ui';
 import { useAuth } from '~/providers/AuthProvider';
 import { useAppState } from '~/providers/StateProvider/StateProvider';
-import {FaChevronDown} from 'react-icons/fa';
-import User from '~/assets/img/user.png';
-// import './Modal/Auth/styles.css';
+// import {FaChevronDown} from 'react-icons/fa';
 const Header: FC = () => {
   const { pathname } = useLocation();
+  const navigate = useNavigate();
   const { state, actions } = useAppState();
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, user } = useAuth();
 
   const openModal = () => {
     actions.setOpenModal(true);
   };
-
+  const depositPage = () => {
+    navigate('/deposit');
+    actions.setDetailMode(1);
+  }
+  const profilePage = () => {
+    navigate('/profile');
+    actions.setDetailMode(0);
+  }
   return (
     <div className="lg:py-5 py-2 px-2 lg:px-5 bg-brand-800 sticky top-0 flex justify-between max-lg:text-sm z-50 border bg-white-100 ">
       <HashLink to={'/'}>
@@ -49,8 +56,8 @@ const Header: FC = () => {
             <div className='flex items-center'>
               <div className="flex items-center gap-2 border-2 rounded-l-2xl h-[48px] px-2">
               <div className="font-bold text-purple-100">$<span>120.00</span></div>
-              <HashLink to={'/profile'}><Image source={User}/></HashLink>
-              <FaChevronDown />
+              <Image source={user?.picture} onClick={profilePage} className='w-6 h-6 rounded-full'/>
+              {/* <FaChevronDown /> */}
               </div>
               <Button
                 text="Deposit"
@@ -59,6 +66,7 @@ const Header: FC = () => {
                 rounded="rounded-r-2xl"
                 bg_color="bg-green-100"
                 text_color="text-white-100"
+                onClick={depositPage}
               />
             </div>
           ) : (

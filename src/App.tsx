@@ -14,7 +14,7 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
-        <div className="max-h-screen flex flex-col overflow-hidden">
+        <div className="h-screen flex flex-col overflow-hidden">
           <Header />
           <Suspense fallback={<div>Loading...</div>}>
             <>
