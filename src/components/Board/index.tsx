@@ -36,7 +36,7 @@ export default function Board(_props: { width?: number; onChange: (fen: string) 
     return newSquares;
   }
 
-  function onSquareClick(square: Square) {
+  function onSquareClick(square: Square) {;
     if (moveFrom) {
       if (moveFrom === square) {
         setMoveFrom('');
@@ -70,11 +70,16 @@ export default function Board(_props: { width?: number; onChange: (fen: string) 
     }
   }
   return (
-    <div className="flex">
+    <div className="flex select-none">
       <Chessboard
         id={'board'}
         boardWidth={650}
         animationDuration={200}
+        isDraggablePiece={(args) => {
+          if (game.turn() === 'w' && args.piece.startsWith('w')) return true;
+          else if (game.turn() === 'b' && args.piece.startsWith('b')) return true;
+          return false;
+        }}
         arePremovesAllowed={false}
         customPieces={customPieces}
         customSquare={CustomSquare}
@@ -84,9 +89,6 @@ export default function Board(_props: { width?: number; onChange: (fen: string) 
         onSquareClick={onSquareClick}
         customSquareStyles={{
           ...options,
-        }}
-        customBoardStyle={{
-          backgroundColor: 'red',
         }}
       />
     </div>

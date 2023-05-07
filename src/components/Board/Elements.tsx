@@ -1,6 +1,6 @@
 import { forwardRef } from 'react';
 import { CustomPieces, CustomSquareRenderer } from 'react-chessboard/dist/chessboard/types';
-import { Bishop, King, Knight, Pawn, Queen, Rook } from '~/assets/icons/icons';
+import { Bishop, King, Knight, Pawn, Queen, Rook } from '~/assets/icons';
 
 export const customPieces: CustomPieces = {
   wB: ({ squareWidth }) => <Bishop width={squareWidth - 10} color="white" />,
