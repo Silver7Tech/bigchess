@@ -5,11 +5,10 @@ import { Square } from 'react-chessboard/dist/chessboard/types';
 import { Square as CustomSquare, customPieces } from './Elements';
 import { customDarkSquareStyle, customLightSquareStyle } from './styles';
 
-export default function Board(_props: { onChange: (fen: string) => void }) {
+export default function Board(_props: { width?: number; onChange: (fen: string) => void }) {
   const game = useRef(new Chess()).current;
   const [moveFrom, setMoveFrom] = useState<Square | ''>('');
   const [options, setOptions] = useState<{ [key in Square]?: CSSProperties }>({});
-  console.log('rendered');
 
   function getMoveOptions(square: Square) {
     const moves = game.moves({
@@ -56,14 +55,12 @@ export default function Board(_props: { onChange: (fen: string) => void }) {
         setOptions({});
         _props.onChange(game.fen());
         return;
+      } else if (game.get(square)) {
+        setMoveFrom(square);
+        setOptions(getMoveOptions(square));
       } else {
-        if (game.get(square)) {
-          setMoveFrom(square);
-          setOptions(getMoveOptions(square));
-        } else {
-          setMoveFrom('');
-          setOptions({});
-        }
+        setMoveFrom('');
+        setOptions({});
       }
     }
 
@@ -73,19 +70,25 @@ export default function Board(_props: { onChange: (fen: string) => void }) {
     }
   }
   return (
-    <Chessboard
-      id="BasicBoard"
-      animationDuration={200}
-      arePremovesAllowed={false}
-      customPieces={customPieces}
-      customSquare={CustomSquare}
-      customDarkSquareStyle={customDarkSquareStyle}
-      customLightSquareStyle={customLightSquareStyle}
-      position={game.fen()}
-      onSquareClick={onSquareClick}
-      customSquareStyles={{
-        ...options,
-      }}
-    />
+    <div className="flex">
+      <Chessboard
+        id={'board'}
+        boardWidth={650}
+        animationDuration={200}
+        arePremovesAllowed={false}
+        customPieces={customPieces}
+        customSquare={CustomSquare}
+        customDarkSquareStyle={customDarkSquareStyle}
+        customLightSquareStyle={customLightSquareStyle}
+        position={game.fen()}
+        onSquareClick={onSquareClick}
+        customSquareStyles={{
+          ...options,
+        }}
+        customBoardStyle={{
+          backgroundColor: 'red',
+        }}
+      />
+    </div>
   );
 }

@@ -1,9 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 import defaultTheme from 'tailwindcss/defaultTheme';
 export default {
-  content: [
-    "./src/**/*.{js,jsx,ts,tsx}",
-  ],
+  content: ['./src/**/*.{js,jsx,ts,tsx}'],
   theme: {
     extend: {
       padding: {
@@ -14,41 +12,50 @@ export default {
         '8px': '8px',
         '9px': '9px',
         '10px': '10px',
-      }
+      },
+      screens: {
+        sm: '576px',
+        // => @media (min-width: 576px) { ... }
+
+        md: '960px',
+        // => @media (min-width: 960px) { ... }
+
+        lg: '1440px',
+        // => @media (min-width: 1440px) { ... }
+      },
     },
     fontFamily: {
-      'Libre' : 'Libre Baskerville',
-      'Inter': 'Inter'
+      Libre: 'Libre Baskerville',
+      Inter: 'Inter',
     },
-    colors:{
+    colors: {
       white: {
-        100: '#F7F7F7'
+        100: '#F7F7F7',
       },
-      purple:{
-        100: '#7B61FF'
+      purple: {
+        100: '#7B61FF',
       },
-      red:{
-        100:'#FF5F57',
-        200: '#f87171'
+      red: {
+        100: '#FF5F57',
+        200: '#f87171',
       },
-      gray:{
-        100:'#E8EDF9',
-        200:'#B7C0D8',
-        300:'#34364C',
-        400:'#9ca3af',
-        500: '#6b7280'
+      gray: {
+        100: '#E8EDF9',
+        200: '#B7C0D8',
+        300: '#34364C',
+        400: '#9ca3af',
+        500: '#6b7280',
       },
       green: {
-        100: '#1BC47D'
+        100: '#1BC47D',
       },
       blue: {
-        100: '#1D9BF0'
+        100: '#1D9BF0',
       },
-      fontFamily:{
-        'libre':['Libre Baskerville', ...defaultTheme.fontFamily.sans]
-      }
-    }
+      fontFamily: {
+        libre: ['Libre Baskerville', ...defaultTheme.fontFamily.sans],
+      },
+    },
   },
   plugins: [],
-}
-
+};
