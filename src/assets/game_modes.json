@@ -1,14 +1,18 @@
 [
-    {
-        "mode" : "src/assets/icons/1.svg"
-    },
-    {
-        "mode" : "src/assets/icons/2.svg"
-    },
-    {
-        "mode" : "src/assets/icons/3.svg"
-    },
-    {
-        "mode" : "src/assets/icons/4.svg"
-    }
+  {
+    "category": "blitz",
+    "title": "Blitz"
+  },
+  {
+    "category": "bullet",
+    "title": "Bullet"
+  },
+  {
+    "category": "rapid",
+    "title": "Rapid"
+  },
+  {
+    "category": "classical",
+    "title": "Classical"
+  }
 ]
