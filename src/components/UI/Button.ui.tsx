@@ -1,4 +1,4 @@
-import { HTMLProps } from "react";
+import { HTMLProps, forwardRef } from 'react';
 
 export interface ButtonProps extends HTMLProps<HTMLButtonElement> {
   text: string;
@@ -14,27 +14,33 @@ export interface ButtonProps extends HTMLProps<HTMLButtonElement> {
   height?: string;
   onClick?: () => void;
 }
-export const Button: React.FC<ButtonProps> = ({
-  text,
-  icon,
-  px = "px-[10px]",
-  py = "py-[5px]",
-  width,
-  height,
-  border,
-  bg_color = "bg-white",
-  text_color = "text-black",
-  rounded = "rounded-md",
-  className = "",
-  onClick,
-}: ButtonProps) => {
-  return (
-    <button
-      className={`${px} ${py} ${rounded} ${border} ${className} ${bg_color} ${text_color} ${width} ${height} text-center`}
-      onClick={onClick}
-    >
-      {icon && <div className="px-1">{icon}</div>}
-      {text}
-    </button>
-  );
-};
+export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
+  (
+    {
+      text,
+      icon,
+      px = 'px-[10px]',
+      py = 'py-[5px]',
+      width,
+      height,
+      border,
+      bg_color = 'bg-white',
+      text_color = 'text-black',
+      rounded = 'rounded-md',
+      className = '',
+      onClick,
+    }: ButtonProps,
+    ref,
+  ) => {
+    return (
+      <button
+        ref={ref}
+        className={`${px} ${py} ${rounded} ${border} ${className} ${bg_color} ${text_color} ${width} ${height} text-center`}
+        onClick={onClick}
+      >
+        {icon && <div className="px-1">{icon}</div>}
+        {text}
+      </button>
+    );
+  },
+);
