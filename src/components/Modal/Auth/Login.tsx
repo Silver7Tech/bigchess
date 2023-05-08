@@ -8,9 +8,12 @@ import { useForm } from 'react-hook-form';
 import * as Yup from 'yup';
 import { useMutation } from '@tanstack/react-query';
 import { trpc } from '~/helpers/trpc';
+
+const googleClientID = import.meta.env.VITE_GOOGLE_CLIENT_ID || "";
 const schema = Yup.object({
   email: Yup.string().email().required('Please provide a valid email'),
 });
+
 export const LoginModal: React.FC = () => {
   const { actions } = useAppState();
   const {
@@ -73,7 +76,7 @@ export const LoginModal: React.FC = () => {
         </div>
         <div className="flex flex-col gap-4 w-full">
           <LoginSocialGoogle
-            client_id='555715297484-s2rquac8fhqfc1dk6j852tcqdrpg0j7t.apps.googleusercontent.com'
+            client_id={googleClientID}
             onResolve={({ data }: any) => {
               console.warn(data);
               // mutateGoogle(data.access_token);
