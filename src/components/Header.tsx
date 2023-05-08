@@ -20,7 +20,7 @@ const Header: FC = () => {
     actions.setOpenModal(true);
   };
   const depositPage = () => {
-    navigate('/deposit');
+    navigate('/profile/deposit');
     actions.setDetailMode(1);
   }
   const profilePage = () => {
