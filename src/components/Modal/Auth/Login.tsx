@@ -1,10 +1,12 @@
 import Logo from '~/assets/img/logo_large.png';
-import { LoginSocialGoogle } from 'reactjs-social-login';
+import { LoginSocialGoogle, IResolveParams } from 'reactjs-social-login';
 import { Button, Image, Input } from '~/components/UI/index.ts';
+import { useAuth } from '~/providers/AuthProvider';
 import { useAppState } from '~/providers/StateProvider/StateProvider';
 import { FaGoogle, FaTwitter } from 'react-icons/fa';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
 import { useMutation } from '@tanstack/react-query';
 import { trpc } from '~/helpers/trpc';
@@ -16,6 +18,8 @@ const schema = Yup.object({
 
 export const LoginModal: React.FC = () => {
   const { actions } = useAppState();
+  const navigate = useNavigate();
+  const { getUser } = useAuth();
   const {
     register,
     handleSubmit,
@@ -27,7 +31,7 @@ export const LoginModal: React.FC = () => {
     },
   });
 
-  const { mutate } = useMutation({
+  const login = useMutation({
     mutationFn: async (data: { email: string }) => await trpc.mutation('auth.login', data),
     onSuccess: (data: any) => {
       localStorage.setItem('token', (data as { token: string }).token);
@@ -39,12 +43,25 @@ export const LoginModal: React.FC = () => {
       // show error message in toast
     },
   });
+  const googleLogin = useMutation({
+    mutationFn: async (req: { token: string, type: string }) => await trpc.mutation('auth.social', req),
+    onSuccess: (data: any) => {
 
+      actions.setOpenModal(false);
+      getUser()
+      navigate('/play');
+      // localStorage.setItem('token', (data as { token: string }).token);
+    },
+    onError: (_error: any) => {
+      // show error message in toast
+    },
+  });
 
   function onSubmit(data: { email: string }) {
     // make sure to remove previous token
     localStorage.removeItem('token');
-    mutate(data);
+    login.mutate(data);
+    
   }
   return (
     <div className="relative w-full h-full bg-white-100 outline-none px-6 py-[15px] rounded-2xl">
@@ -77,9 +94,14 @@ export const LoginModal: React.FC = () => {
         <div className="flex flex-col gap-4 w-full">
           <LoginSocialGoogle
             client_id={googleClientID}
-            onResolve={({ data }: any) => {
-              console.warn(data);
-              // mutateGoogle(data.access_token);
+            scope='email'
+            onResolve={({ provider, data }: IResolveParams) => {
+              const req = {
+                token: data.access_token,
+                type: provider
+              }
+              console.warn(data)
+              googleLogin.mutate(req)
             }}
             onReject={(err : any) => {
               // console.log(err);
