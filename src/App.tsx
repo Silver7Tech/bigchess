@@ -24,8 +24,8 @@ function App() {
                 <Route path="/mode" element={<GameMode />} />
                 <Route path="/leaderboard" element={<Leaderboard />} />
                 <Route path="/profile" element={<Profile/>} />
-                <Route path="/deposit" element={<Deposit/>} />
-                <Route path="/preferences" element={<Preferences/>} />
+                <Route path="/profile/deposit" element={<Deposit/>} />
+                <Route path="/profile/preferences" element={<Preferences/>} />
                 <Route path="/*" element={<Navigate to="/" />} />
               </Routes>
             </>

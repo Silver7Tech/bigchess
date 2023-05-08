@@ -26,8 +26,8 @@ const SideBar:React.FC = () => {
                 },
             }}>
                 <MenuItem active={detailMode === 0 ? true : false} component={<Link to="/profile" />} onClick={() => activeMenu(0)}> Profile </MenuItem>
-                <MenuItem active={detailMode === 1 ? true : false} component={<Link to="/deposit" />} onClick={() => activeMenu(1)}>Deposit Money </MenuItem>
-                <MenuItem active={detailMode === 2 ? true : false} component={<Link to="/preferences" />} onClick={() => activeMenu(2)}> Preferences </MenuItem>
+                <MenuItem active={detailMode === 1 ? true : false} component={<Link to="/profile/deposit" />} onClick={() => activeMenu(1)}>Deposit Money </MenuItem>
+                <MenuItem active={detailMode === 2 ? true : false} component={<Link to="/profile/preferences" />} onClick={() => activeMenu(2)}> Preferences </MenuItem>
                 <MenuItem active={detailMode === 3 ? true : false} onClick={Logout}> Logout </MenuItem>
             </Menu>
         </Sidebar>
