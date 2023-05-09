@@ -5,9 +5,11 @@ import { Square } from 'react-chessboard/dist/chessboard/types';
 import { socket } from '../Room';
 import { Square as CustomSquare, customPieces } from './Elements';
 import { customDarkSquareStyle, customLightSquareStyle } from './styles';
+import useResizeObserver from '~/hooks/useResizeObserver';
 
 export default function Board(_props: { width?: number; onChange: (fen: string) => void }) {
   const game = useRef(new Chess()).current;
+
   const [moveFrom, setMoveFrom] = useState<Square | ''>('');
   const [options, setOptions] = useState<{ [key in Square]?: CSSProperties }>({});
   const [newFen, setNewFen] = useState(game.fen());
@@ -78,11 +80,13 @@ export default function Board(_props: { width?: number; onChange: (fen: string) 
     });
   }, []);
   return (
-    <div className="flex select-none">
+    <div className="board_container" style={{
+      maxWidth: "80vh",
+    }}>
+      <div style={{width:"100%"}}></div>
       <Chessboard
         id={'board'}
-        boardWidth={650}
-        animationDuration={200}
+        animationDuration={300}
         isDraggablePiece={(args) => {
           if (game.turn() === 'w' && args.piece.startsWith('w')) return true;
           else if (game.turn() === 'b' && args.piece.startsWith('b')) return true;

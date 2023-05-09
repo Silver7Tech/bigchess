@@ -12,7 +12,7 @@ export const Option = () => {
     state: { gameMode, timeMode },
   } = useAppState();
   return (
-    <div className={`max-w-[320px] border border-sky-600 flex flex-col`}>
+    <div className={`min-w-[256px] border border-sky-600 flex flex-col flex-none`}>
       <div className="w-full flex justify-between px-4 py-4 border-b text-bold ">
         <p>Play</p>
         <p>Friends</p>
@@ -50,9 +50,14 @@ export const Option = () => {
             </div>
           </div>
           <div className="flex flex-col mt-6 gap-2">
-            <Button text="Play" className="w-full border font-bold" height="h-12" onClick={() => {
-              socket.connect();
-            }}/>
+            <Button
+              text="Play"
+              className="w-full border font-bold"
+              height="h-12"
+              onClick={() => {
+                socket.connect();
+              }}
+            />
 
             <Button text="Invite a Friend" className="w-full border font-bold" height="h-12" />
           </div>

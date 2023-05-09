@@ -25,14 +25,12 @@ const Room = () => {
   }, []);
   return (
     <div className="room">
-      <div className="flex-1">
-        <Board
-          onChange={(_fen: string) => {
-            socket.emit('move', _fen);
-            // console.log(fen);
-          }}
-        />
-      </div>
+      <Board
+        onChange={(_fen: string) => {
+          socket.emit('move', _fen);
+          // console.log(fen);
+        }}
+      />
       <Option />
     </div>
   );
