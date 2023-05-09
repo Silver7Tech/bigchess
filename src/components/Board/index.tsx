@@ -1,7 +1,8 @@
 import { Chess } from 'chess.js';
-import { CSSProperties, useRef, useState } from 'react';
+import { CSSProperties, useEffect, useRef, useState } from 'react';
 import { Chessboard } from 'react-chessboard';
 import { Square } from 'react-chessboard/dist/chessboard/types';
+import { socket } from '../Room';
 import { Square as CustomSquare, customPieces } from './Elements';
 import { customDarkSquareStyle, customLightSquareStyle } from './styles';
 
@@ -9,7 +10,7 @@ export default function Board(_props: { width?: number; onChange: (fen: string) 
   const game = useRef(new Chess()).current;
   const [moveFrom, setMoveFrom] = useState<Square | ''>('');
   const [options, setOptions] = useState<{ [key in Square]?: CSSProperties }>({});
-
+  const [newFen, setNewFen] = useState(game.fen());
   function getMoveOptions(square: Square) {
     const moves = game.moves({
       square,
@@ -36,7 +37,7 @@ export default function Board(_props: { width?: number; onChange: (fen: string) 
     return newSquares;
   }
 
-  function onSquareClick(square: Square) {;
+  function onSquareClick(square: Square) {
     if (moveFrom) {
       if (moveFrom === square) {
         setMoveFrom('');
@@ -69,6 +70,13 @@ export default function Board(_props: { width?: number; onChange: (fen: string) 
       setOptions(getMoveOptions(square));
     }
   }
+
+  useEffect(() => {
+    socket.on('move', (fen: string) => {
+      game.load(fen);
+      setNewFen(fen);
+    });
+  }, []);
   return (
     <div className="flex select-none">
       <Chessboard
@@ -85,7 +93,7 @@ export default function Board(_props: { width?: number; onChange: (fen: string) 
         customSquare={CustomSquare}
         customDarkSquareStyle={customDarkSquareStyle}
         customLightSquareStyle={customLightSquareStyle}
-        position={game.fen()}
+        position={newFen}
         onSquareClick={onSquareClick}
         customSquareStyles={{
           ...options,

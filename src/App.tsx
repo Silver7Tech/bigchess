@@ -15,7 +15,7 @@ function App() {
     <ErrorBoundary>
       <QueryClientProvider client={queryClient}>
         <AuthProvider>
-          <div className="min-h-screen flex flex-col">
+          <div className="h-screen w-screen overflow-hidden flex flex-col">
             <Header />
             <Suspense
               fallback={

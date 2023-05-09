@@ -5,6 +5,7 @@ import { ModeItem } from '~/components/UI/ModeItem.ui';
 import { TimeItem } from '~/components/UI/TimeItem.ui';
 import { useAppState } from '~/providers/StateProvider/StateProvider';
 import { PlayingStatus } from './PlayingStatus';
+import { socket } from '.';
 
 export const Option = () => {
   const {
@@ -49,7 +50,9 @@ export const Option = () => {
             </div>
           </div>
           <div className="flex flex-col mt-6 gap-2">
-            <Button text="Play" className="w-full border font-bold" height="h-12" />
+            <Button text="Play" className="w-full border font-bold" height="h-12" onClick={() => {
+              socket.connect();
+            }}/>
 
             <Button text="Invite a Friend" className="w-full border font-bold" height="h-12" />
           </div>
