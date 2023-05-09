@@ -5,7 +5,6 @@ import { Square } from 'react-chessboard/dist/chessboard/types';
 import { socket } from '../Room';
 import { Square as CustomSquare, customPieces } from './Elements';
 import { customDarkSquareStyle, customLightSquareStyle } from './styles';
-import useResizeObserver from '~/hooks/useResizeObserver';
 
 export default function Board(_props: { width?: number; onChange: (fen: string) => void }) {
   const game = useRef(new Chess()).current;
@@ -80,10 +79,13 @@ export default function Board(_props: { width?: number; onChange: (fen: string) 
     });
   }, []);
   return (
-    <div className="board_container" style={{
-      maxWidth: "80vh",
-    }}>
-      <div style={{width:"100%"}}></div>
+    <div
+      className="board_container"
+      style={{
+        maxWidth: '80vh',
+      }}
+    >
+      <div style={{ width: '100%' }}></div>
       <Chessboard
         id={'board'}
         animationDuration={300}
