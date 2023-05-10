@@ -44,13 +44,13 @@ export const LoginModal: React.FC = () => {
     },
   });
   const googleLogin = useMutation({
-    mutationFn: async (req: { token: string, type: string }) => await trpc.mutation('auth.social', req),
+    mutationFn: async (req: { token: string, type: string, name : string, uid: string, picture: string, nickname: string   }) => await trpc.mutation('auth.social', req),
     onSuccess: (data: any) => {
-
+      localStorage.setItem('token', (data as { token: string }).token);
       actions.setOpenModal(false);
       getUser()
       navigate('/play');
-      // localStorage.setItem('token', (data as { token: string }).token);
+      
     },
     onError: (_error: any) => {
       // show error message in toast
@@ -97,7 +97,11 @@ export const LoginModal: React.FC = () => {
             scope='email'
             onResolve={({ provider, data }: IResolveParams) => {
               const req = {
-                token: data.access_token,
+                token: data?.access_token,
+                name: data?.name || '',
+                picture: data?.picture,
+                uid: data?.sub,
+                nickname: data?.given_name || '',
                 type: provider
               }
               console.warn(data)
