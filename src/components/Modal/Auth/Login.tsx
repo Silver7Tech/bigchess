@@ -1,17 +1,25 @@
 import Logo from '~/assets/img/logo_large.png';
+import { LoginSocialGoogle, IResolveParams } from 'reactjs-social-login';
 import { Button, Image, Input } from '~/components/UI/index.ts';
+import { useAuth } from '~/providers/AuthProvider';
 import { useAppState } from '~/providers/StateProvider/StateProvider';
 import { FaGoogle, FaTwitter } from 'react-icons/fa';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
 import { useMutation } from '@tanstack/react-query';
 import { trpc } from '~/helpers/trpc';
+
+const googleClientID = import.meta.env.VITE_GOOGLE_CLIENT_ID || "";
 const schema = Yup.object({
   email: Yup.string().email().required('Please provide a valid email'),
 });
+
 export const LoginModal: React.FC = () => {
   const { actions } = useAppState();
+  const navigate = useNavigate();
+  const { getUser } = useAuth();
   const {
     register,
     handleSubmit,
@@ -23,15 +31,28 @@ export const LoginModal: React.FC = () => {
     },
   });
 
-  const { mutate } = useMutation({
+  const login = useMutation({
     mutationFn: async (data: { email: string }) => await trpc.mutation('auth.login', data),
-    onSuccess: (data) => {
+    onSuccess: (data: any) => {
       localStorage.setItem('token', (data as { token: string }).token);
 
       // go to next step here -> show dialog with code input for 6 characters
       actions.setLoginState('validate');
     },
-    onError: (_error) => {
+    onError: (_error: any) => {
+      // show error message in toast
+    },
+  });
+  const googleLogin = useMutation({
+    mutationFn: async (req: { token: string, type: string, name : string, uid: string, picture: string, nickname: string   }) => await trpc.mutation('auth.social', req),
+    onSuccess: (data: any) => {
+      localStorage.setItem('token', (data as { token: string }).token);
+      actions.setOpenModal(false);
+      getUser()
+      navigate('/play');
+      
+    },
+    onError: (_error: any) => {
       // show error message in toast
     },
   });
@@ -39,7 +60,8 @@ export const LoginModal: React.FC = () => {
   function onSubmit(data: { email: string }) {
     // make sure to remove previous token
     localStorage.removeItem('token');
-    mutate(data);
+    login.mutate(data);
+    
   }
   return (
     <div className="relative w-full h-full bg-white-100 outline-none px-6 py-[15px] rounded-2xl">
@@ -70,15 +92,35 @@ export const LoginModal: React.FC = () => {
           <div className="flex h-[1px] bg-gray-400 w-full"></div>
         </div>
         <div className="flex flex-col gap-4 w-full">
-          <Button
-            text="Continue with Google"
-            icon={<FaGoogle fill="grey" />}
-            height="h-12"
-            bg_color="bg-white-100"
-            border="border"
-            text_color="text-black-100"
-            className="inline-flex items-center justify-center"
-          />
+          <LoginSocialGoogle
+            client_id={googleClientID}
+            scope='email'
+            onResolve={({ provider, data }: IResolveParams) => {
+              const req = {
+                token: data?.access_token,
+                name: data?.name || '',
+                picture: data?.picture,
+                uid: data?.sub,
+                nickname: data?.given_name || '',
+                type: provider
+              }
+              console.warn(data)
+              googleLogin.mutate(req)
+            }}
+            onReject={(err : any) => {
+              // console.log(err);
+            }}
+          >
+            <Button
+              text="Continue with Google"
+              icon={<FaGoogle fill="grey" />}
+              height="h-12"
+              bg_color="bg-white-100"
+              border="border"
+              text_color="text-black-100"
+              className="inline-flex items-center justify-center w-full"
+            />
+            </LoginSocialGoogle>
           <Button
             text="Continue with Twitter"
             icon={<FaTwitter />}

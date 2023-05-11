@@ -18,12 +18,12 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
-    
+
     /* Path alias */
     "paths": {
       "~/*": ["./src/*", "./dist/*"]
     }
   },
-  "include": ["src"],
+  "include": ["src", "./.eslintrc.cjs", "./vite.config.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
