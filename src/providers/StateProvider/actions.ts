@@ -8,6 +8,11 @@ export interface SetGameModeAction {
   payload: number;
 }
 
+export interface SetDetailModeAction {
+  type: 'SET_DETAIL_MODE';
+  payload: number;
+}
+
 export interface SetTimeModeAction {
   type: 'SET_TIME_MODE';
   payload: number;
@@ -22,4 +27,5 @@ export type StateActions =
   | SetPlayerStateAction
   | SetGameModeAction
   | SetTimeModeAction
+  | SetDetailModeAction
   | SetOpenModalAction;

@@ -46,6 +46,7 @@ export const Option: React.FC<OptionInterface> = ({
             {timeModeData.map((time, index) => {
               return (
                 <TimeItem
+                  key={index}
                   time={time.time}
                   time_mode={index}
                   activated={timeMode === index ? true : false}

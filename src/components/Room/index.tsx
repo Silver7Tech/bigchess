@@ -11,7 +11,7 @@ export interface RoomInterface {
 const Room: React.FC<RoomInterface> = ({ isPlaying }: RoomInterface) => {
   // const [ isPlaying, setIsPlaying ] = useState(true)
   return (
-    <div>
+    <div className="my-auto">
       <div className="grid grid-cols-12 place-content-center gap-6">
         <div className="col-span-2" />
         {isPlaying ? <ChatRoom /> : <GamePool />}

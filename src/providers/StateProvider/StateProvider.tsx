@@ -33,6 +33,11 @@ export const reducer = (
         ...state,
         timeMode: action.payload,
       };
+    case 'SET_DETAIL_MODE':
+      return {
+        ...state,
+        detailMode: action.payload,
+      };
   }
 };
 
@@ -44,6 +49,7 @@ export const StateContextProvider: React.FC<{
     loginState: 'login',
     gameMode: 0,
     timeMode: 0,
+    detailMode: 0,
   });
 
   return (
@@ -54,6 +60,7 @@ export const StateContextProvider: React.FC<{
           setLoginState: (state) => dispatch({ type: 'SET_LOGIN_STATE', payload: state }),
           setGameMode: (state) => dispatch({ type: 'SET_GAME_MODE', payload: state }),
           setTimeMode: (state) => dispatch({ type: 'SET_TIME_MODE', payload: state }),
+          setDetailMode: (state) => dispatch({ type: 'SET_DETAIL_MODE', payload: state }),
           setOpenModal: (state) => dispatch({ type: 'SET_MODAL_OPEN', payload: state }),
         },
       }}
