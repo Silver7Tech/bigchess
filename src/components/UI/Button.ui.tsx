@@ -1,3 +1,4 @@
+import cn from 'classnames';
 import { HTMLProps, forwardRef } from 'react';
 
 export interface ButtonProps extends HTMLProps<HTMLButtonElement> {
@@ -12,6 +13,8 @@ export interface ButtonProps extends HTMLProps<HTMLButtonElement> {
   border?: string;
   width?: string;
   height?: string;
+  bg_colorHover?: string;
+  text_colorHover?: string;
   onClick?: () => void;
 }
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
@@ -24,18 +27,24 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       width,
       height,
       border,
-      bg_color = 'bg-white',
+      bg_color = '',
       text_color = 'text-black',
       rounded = 'rounded-md',
       className = '',
       onClick,
+      ...props
     }: ButtonProps,
     ref,
   ) => {
     return (
       <button
         ref={ref}
-        className={`${px} ${py} ${rounded} ${border} ${className} ${bg_color} ${text_color} ${width} ${height} text-center`}
+        className={cn(
+          className,
+          `${px} ${py} ${border} ${bg_color} ${rounded}`,
+          `${text_color} ${width} ${height} text-center`,
+          `hover:${props.bg_colorHover} hover:${props.text_colorHover}}`,
+        )}
         onClick={onClick}
       >
         {icon && <div className="px-1">{icon}</div>}

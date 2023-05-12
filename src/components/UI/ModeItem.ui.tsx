@@ -1,9 +1,9 @@
 import { Blitz, Bullet, Rapid, Settings } from '~/assets/icons';
-import { useAppState } from '~/providers/StateProvider/StateProvider';
 export interface ModeItemProps {
   SVG: string;
   activated?: boolean;
   mode_number: number;
+  onActivated?: () => void;
 }
 const Icons = (props: { SVG: string }) => {
   switch (props.SVG) {
@@ -23,17 +23,14 @@ const Icons = (props: { SVG: string }) => {
 export const ModeItem: React.FC<ModeItemProps> = ({
   SVG,
   activated,
-  mode_number,
+  onActivated,
 }: ModeItemProps) => {
-  const {
-    actions: { setGameMode },
-  } = useAppState();
   return (
     <div
       className={`w-[64px] h-[64px] rounded-md flex items-center justify-center border ${
         activated ? 'hover:bg-red-200' : 'hover:bg-gray-200'
       } cursor-pointer ${activated ? 'bg-red-100' : 'bg-white'}`}
-      onClick={() => setGameMode(mode_number)}
+      onClick={onActivated}
     >
       <Icons SVG={SVG} />
     </div>

@@ -11,7 +11,7 @@ export default function Board(_props: { width?: number; onChange: (fen: string) 
 
   const [moveFrom, setMoveFrom] = useState<Square | ''>('');
   const [options, setOptions] = useState<{ [key in Square]?: CSSProperties }>({});
-  const [newFen, setNewFen] = useState(game.fen());
+  const [,setNewFen] = useState(game.fen());
   function getMoveOptions(square: Square) {
     const moves = game.moves({
       square,
@@ -74,6 +74,7 @@ export default function Board(_props: { width?: number; onChange: (fen: string) 
 
   useEffect(() => {
     socket.on('move', (fen: string) => {
+      // console.log(fen);
       game.load(fen);
       setNewFen(fen);
     });
@@ -99,7 +100,7 @@ export default function Board(_props: { width?: number; onChange: (fen: string) 
         customSquare={CustomSquare}
         customDarkSquareStyle={customDarkSquareStyle}
         customLightSquareStyle={customLightSquareStyle}
-        position={newFen}
+        position={game.fen()}
         onSquareClick={onSquareClick}
         customSquareStyles={{
           ...options,

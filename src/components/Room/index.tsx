@@ -19,18 +19,13 @@ export const socket = io(URL, {
 const Room = () => {
   useEffect(() => {
     socket.on('connect', () => {
-      console.log(socket.id); // x8WIv7-mJelg7on_ALbx
-      console.log(socket.recovered); // true
+      // console.log(socket.id); // x8WIv7-mJelg7on_ALbx
+      // console.log(socket.recovered); // true
     });
   }, []);
   return (
     <div className="room">
-      <Board
-        onChange={(_fen: string) => {
-          socket.emit('move', _fen);
-          // console.log(fen);
-        }}
-      />
+      <Board onChange={(fen: string) => socket.emit('move', fen)} />
       <Option />
     </div>
   );

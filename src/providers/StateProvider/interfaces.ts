@@ -4,6 +4,7 @@ export interface StateContextInterface {
   gameMode: number | undefined;
   detailMode: number | undefined;
   timeMode: number | undefined;
+  isInGame: boolean;
 }
 
 export interface StateActionsInterface {
@@ -11,5 +12,6 @@ export interface StateActionsInterface {
   setGameMode: (state: number) => void;
   setTimeMode: (state: number) => void;
   setDetailMode: (state: number) => void;
+  setIsInGame: (state: boolean) => void;
   setOpenModal: (state: boolean) => void;
 }

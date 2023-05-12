@@ -1,63 +1,67 @@
 import * as Dialog from '@radix-ui/react-dialog';
 import { FC } from 'react';
 import { useLocation } from 'react-router-dom';
-import { useNavigate } from 'react-router'
+import { useNavigate } from 'react-router';
 import { HashLink } from 'react-router-hash-link';
 import Logo from '~/assets/img/logo.png';
 import { AuthModal } from '~/components/Modal/Auth';
 import { Button, Image } from '~/components/UI';
 import { LinkButton } from '~/components/UI/LinkButton.ui';
 import { useAuth } from '~/providers/AuthProvider';
-import { useAppState } from '~/providers/StateProvider/StateProvider';
-// import {FaChevronDown} from 'react-icons/fa';
+import { appActions, useTrackedStore } from '~/store';
+
+// import './Modal/Auth/styles.css';
 const Header: FC = () => {
   const { pathname } = useLocation();
   const navigate = useNavigate();
-  const { state, actions } = useAppState();
-  const { isAuthenticated, user } = useAuth();
 
-  const openModal = () => {
-    actions.setOpenModal(true);
-  };
+  const { isAuthenticated, user } = useAuth();
+  const isOpen = useTrackedStore().auth.isModalOpen();
+
+  const openModal = () => appActions.auth.isModalOpen(true);
   const depositPage = () => {
     navigate('/profile/deposit');
-    actions.setDetailMode(1);
-  }
+    appActions.profile.currentTab('deposit');
+  };
   const profilePage = () => {
     navigate('/profile');
-    actions.setDetailMode(0);
-  }
+    appActions.profile.currentTab('profile');
+  };
   return (
-    <div className="lg:py-5 py-2 px-2 lg:px-5 bg-brand-800 sticky top-0 flex justify-between max-lg:text-sm z-50 border bg-white-100 ">
+    <div className="md:px-4 py-2 px-2 bg-brand-800 top-0 flex items-stretch justify-between max-sm:text-sm z-50 border header">
       <HashLink to={'/'}>
         <div className="flex justify-center items-center">
           <Image source={Logo} />
           <p className="font-libre font-Libre text-2xl ml-2">BigChess</p>
         </div>
       </HashLink>
-      <div>
-        <nav className="absolute top-1/2  transform -translate-x-1/2 -translate-y-1/2">
-          <ul className="flex items-center space-x-8">
-            <li>
-              <LinkButton text="Play game" to="/play" actived={pathname.includes('play')} />
-            </li>
-            <li>
-              <LinkButton text="Game Modes" to="/mode" actived={pathname.includes('mode')} />
-            </li>
-            <li>
-              <LinkButton text="Leaderboard" to="/leaderboard" actived={pathname.includes('board')} />
-            </li>
-          </ul>
-        </nav>
-      </div>
+      <nav className="max-md:hidden">
+        <ul className="flex items-center space-x-8 h-full">
+          <li>
+            <LinkButton text="Play game" to="/play" actived={pathname.includes('play')} />
+          </li>
+          <li>
+            <LinkButton text="Game Modes" to="/mode" actived={pathname.includes('mode')} />
+          </li>
+          <li>
+            <LinkButton text="Leaderboard" to="/leaderboard" actived={pathname.includes('board')} />
+          </li>
+        </ul>
+      </nav>
       <div className="flex items-center">
         <div>
           {isAuthenticated() ? (
-            <div className='flex items-center'>
+            <div className="flex items-center">
               <div className="flex items-center gap-2 border-2 rounded-l-2xl h-[48px] px-2">
-              <div className="font-bold text-purple-100">$<span>120.00</span></div>
-              <Image source={user?.picture} onClick={profilePage} className='w-6 h-6 rounded-full'/>
-              {/* <FaChevronDown /> */}
+                <div className="font-bold text-purple-100">
+                  $<span>120.00</span>
+                </div>
+                <Image
+                  source={user?.picture}
+                  onClick={profilePage}
+                  className="w-6 h-6 rounded-full"
+                />
+                {/* <FaChevronDown /> */}
               </div>
               <Button
                 text="Deposit"
@@ -71,11 +75,11 @@ const Header: FC = () => {
             </div>
           ) : (
             <Dialog.Root
-              open={state.modalOpen}
+              open={isOpen}
               onOpenChange={(open) => {
-                actions.setOpenModal(open);
+                appActions.auth.isModalOpen(open);
 
-                if (!open) actions.setLoginState('login');
+                if (!open) appActions.auth.step('login');
               }}
             >
               <Dialog.Trigger asChild>
