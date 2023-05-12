@@ -1,30 +1,18 @@
-import { Button } from '.'
-import { useNavigate } from 'react-router-dom'
+import { Image } from '.'
 
 export interface CardProps{
     text: string,
-    button?: string
+    image?: string,
+    to : (param: string) => void,
 }
 
-export const Card: React.FC<CardProps>  = ({ text, button='Button' }: CardProps) =>{
-    const navigate = useNavigate()
-    const gotoRoom = () => {     
-        navigate('/play')
-    }
+export const Card: React.FC<CardProps>  = ({ text, image, to }: CardProps) =>{
     return(
-        <div className='relative min-w-[400px] min-h-[500px] bg-cyan-300'>
-            <div className='absolute flex w-full top-52 justify-center'>
-                <p className='text-2xl'>{text}</p>
+        <button className='flex flex-col items-center justify-center w-[280px] h-[280px] border-[1px] rounded-[27.617px] bg-gradient-to-r from-white-200 from-0%  to-white-300 to-100% shadow-2xl' onClick={() => to("play")}>
+            <div className='p-5 rounded-[27.617px] shadow-xl border-[#b4c7d880] border-[0.41844px] bg-card'>
+                <Image source={image}/>
             </div>
-            <div className='absolute flex w-full bottom-12 justify-center'>
-                <Button
-                    text={button}
-                    bg_color='#000000'
-                    text_color='#ffffff'
-                    onClick={gotoRoom}
-                />
-            </div>
-            
-        </div>
+            <span className='font-bold mt-10 text-2xl'>{text}</span>
+        </button>
     )
 }

@@ -20,9 +20,15 @@ export default {
       'Libre' : 'Libre Baskerville',
       'Inter': 'Inter'
     },
+    boxShadow: {
+      'xl': '0px 77.5917px 31.1939px rgba(0, 146, 255, 0.03), 0px 43.7763px 26.2134px rgba(0, 146, 255, 0.1), 0px 19.3979px 19.3979px rgba(0, 146, 255, 0.17), 0px 4.98052px 10.7475px rgba(0, 146, 255, 0.2)',
+      '2xl' : '0px 107.28px 43.0688px rgba(53, 114, 141, 0.01), 0px 60.2963px 36.0212px rgba(53, 114, 141, 0.03), 0px 26.6243px 26.6243px rgba(53, 114, 141, 0.04), 0px 7.04762px 14.8783px rgba(53, 114, 141, 0.05)',
+    },
     colors:{
       white: {
-        100: '#F7F7F7'
+        100: '#F7F7F7',
+        200: '#F6FBFF',
+        300: '#ffffffa6',
       },
       purple:{
         100: '#7B61FF'
@@ -45,6 +51,7 @@ export default {
       blue: {
         100: '#1D9BF0'
       },
+      card: 'linear-gradient(292.94deg, #DCEEFF 0%, #F1F8FF 0%, #F1F8FF 0%, #FFFFFF 100%)',
       fontFamily:{
         'libre':['Libre Baskerville', ...defaultTheme.fontFamily.sans]
       }
