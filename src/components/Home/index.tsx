@@ -23,7 +23,7 @@ const Home: FC = () => {
       <Card
         image = {Material}
         text='Play For Free'
-        to={() => goTo('/play')}  
+        to={() => navigate('/play')}  
       />
       <Card
         image = {Solar}
