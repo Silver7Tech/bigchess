@@ -1,13 +1,15 @@
 import { createStore } from '@udecode/zustood';
 interface StateProps {
-  modeId: string;
+  limit: number;
+  inc: number;
   category: 'blitz' | 'rapid' | 'classical' | 'bullet';
   isInGame: boolean;
 }
 
 const initialStateProps: StateProps = {
   isInGame: false,
-  modeId: '',
+  limit: 0,
+  inc: 0,
   category: 'bullet',
 };
 

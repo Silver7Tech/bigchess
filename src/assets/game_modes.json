@@ -1,18 +1,47 @@
 [
   {
-    "category": "blitz",
-    "title": "Blitz"
+    "duration": 10,
+    "increment": null,
+    "category": "rapid"
   },
   {
-    "category": "bullet",
-    "title": "Bullet"
+    "duration": 15,
+    "increment": 10,
+    "category": "rapid"
   },
   {
-    "category": "rapid",
-    "title": "Rapid"
+    "duration": 30,
+    "increment": null,
+    "category": "rapid"
   },
   {
-    "category": "classical",
-    "title": "Classical"
+    "duration": 3,
+    "increment": 0,
+    "category": "blitz"
+  },
+  {
+    "duration": 3,
+    "increment": 2,
+    "category": "blitz"
+  },
+  {
+    "duration": 5,
+    "increment": 0,
+    "category": "blitz"
+  },
+  {
+    "duration": 1,
+    "increment": 0,
+    "category": "bullet"
+  },
+  {
+    "duration": 2,
+    "increment": 1,
+    "category": "bullet"
+  },
+  {
+    "duration": 3,
+    "increment": 1,
+    "category": "bullet"
   }
 ]

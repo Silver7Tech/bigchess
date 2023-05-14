@@ -1,4 +1,4 @@
-import { GameMode } from '../Room/Option';
+import { GameMode } from '~/interfaces';
 
 export interface TimeItemProps {
   mode: GameMode;

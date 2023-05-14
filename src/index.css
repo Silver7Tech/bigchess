@@ -64,6 +64,11 @@
   margin: 0 auto;
 }
 
+.gameroom {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
 @media screen and (min-width: 768px) {
   .room {
     display: flex;
@@ -72,11 +77,14 @@
     align-items: stretch;
     gap: 1rem;
   }
+
+  .room-grid-template {
+    grid-template-columns: minmax(min-content, 348px) min-content minmax(min-content, 348px);
+  }
   .header {
     position: sticky;
   }
   .board_container {
-    width: 100px;
     flex: 1;
     max-width: 70vw;
     display: flex;

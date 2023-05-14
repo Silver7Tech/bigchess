@@ -1,17 +1,21 @@
 import { Chess } from 'chess.js';
-import { CSSProperties, useEffect, useRef, useState } from 'react';
+import { CSSProperties, useRef, useState } from 'react';
 import { Chessboard } from 'react-chessboard';
 import { Square } from 'react-chessboard/dist/chessboard/types';
-import { socket } from '../Room';
+
 import { Square as CustomSquare, customPieces } from './Elements';
 import { customDarkSquareStyle, customLightSquareStyle } from './styles';
 
-export default function Board(_props: { width?: number; onChange: (fen: string) => void }) {
+export default function Board(_props: {
+  width?: number;
+  disabled?: boolean;
+  onChange?: (fen: string) => void;
+}) {
   const game = useRef(new Chess()).current;
 
   const [moveFrom, setMoveFrom] = useState<Square | ''>('');
   const [options, setOptions] = useState<{ [key in Square]?: CSSProperties }>({});
-  const [,setNewFen] = useState(game.fen());
+  // const [, setNewFen] = useState(game.fen());
   function getMoveOptions(square: Square) {
     const moves = game.moves({
       square,
@@ -39,6 +43,7 @@ export default function Board(_props: { width?: number; onChange: (fen: string) 
   }
 
   function onSquareClick(square: Square) {
+    if (_props.disabled) return;
     if (moveFrom) {
       if (moveFrom === square) {
         setMoveFrom('');
@@ -55,7 +60,7 @@ export default function Board(_props: { width?: number; onChange: (fen: string) 
         });
         setMoveFrom('');
         setOptions({});
-        _props.onChange(game.fen());
+        _props.onChange?.(game.fen());
         return;
       } else if (game.get(square)) {
         setMoveFrom(square);
@@ -71,14 +76,6 @@ export default function Board(_props: { width?: number; onChange: (fen: string) 
       setOptions(getMoveOptions(square));
     }
   }
-
-  useEffect(() => {
-    socket.on('move', (fen: string) => {
-      // console.log(fen);
-      game.load(fen);
-      setNewFen(fen);
-    });
-  }, []);
   return (
     <div
       className="board_container"
@@ -86,11 +83,11 @@ export default function Board(_props: { width?: number; onChange: (fen: string) 
         maxWidth: '80vh',
       }}
     >
-      <div style={{ width: '100%' }}></div>
       <Chessboard
         id={'board'}
         animationDuration={300}
         isDraggablePiece={(args) => {
+          if (_props.disabled) return false;
           if (game.turn() === 'w' && args.piece.startsWith('w')) return true;
           else if (game.turn() === 'b' && args.piece.startsWith('b')) return true;
           return false;
