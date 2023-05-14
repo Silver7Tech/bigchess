@@ -39,10 +39,10 @@ const Header: FC = () => {
         <nav className="absolute top-1/2  transform -translate-x-1/2 -translate-y-1/2">
           <ul className="flex items-center space-x-8">
             <li>
-              <LinkButton text="Play game" to="/play" actived={pathname.includes('play')} />
+              <LinkButton text="Play" to="/play" actived={pathname.includes('play')} />
             </li>
             <li>
-              <LinkButton text="Game Modes" to="/mode" actived={pathname.includes('mode')} />
+              <LinkButton text="Pools" to="/pools" actived={pathname.includes('pools')} />
             </li>
             <li>
               <LinkButton text="Leaderboard" to="/leaderboard" actived={pathname.includes('board')} />

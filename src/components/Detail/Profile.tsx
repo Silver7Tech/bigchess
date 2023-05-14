@@ -6,6 +6,8 @@ import SideBar  from './SideBar'
 import { Table, Image } from '../UI'
 import { ColumnDefinitionType } from '../UI'
 import { useAuth } from '~/providers/AuthProvider';
+import { useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 interface History {
     type: React.ReactElement;
@@ -85,7 +87,13 @@ const columns: ColumnDefinitionType<History, keyof History>[] = [
 ]
 
 const Profile: React.FC = () => {
-    const { user } = useAuth()
+    const { user, isAuthenticated } = useAuth()
+    const navigate = useNavigate();
+    useEffect(() => {
+        if(!isAuthenticated()){
+            navigate('/');
+        }
+    },[])
     return (
         <div className='flex mt-2'>
             <div className= 'ml-14'>

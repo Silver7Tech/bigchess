@@ -4,8 +4,9 @@ import { Route, Routes, Navigate } from "react-router-dom";
 import Header from "~/components/Header";
 import { AuthProvider } from "./providers/AuthProvider";
 function App() {
+  const Home = lazy(() => import("./components/Home"));
   const Room = lazy(() => import("./components/Room"));
-  const GameMode = lazy(() => import("./components/GameMode"));
+  const Pools = lazy(() => import("./components/Pools"));
   const Leaderboard = lazy(() => import("./components/Leaderboard"));
   const Profile = lazy(() => import("./components/Detail/Profile"));
   const Deposit = lazy(() => import("./components/Detail/Deposit"));
@@ -19,9 +20,9 @@ function App() {
           <Suspense fallback={<div>Loading...</div>}>
             <>
               <Routes>
-                <Route path="/" element={<Room isPlaying={false} />} />
+                <Route path="/" element={<Home />} />
                 <Route path="/play" element={<Room isPlaying={true} />} />
-                <Route path="/mode" element={<GameMode />} />
+                <Route path="/pools" element={<Pools />} />
                 <Route path="/leaderboard" element={<Leaderboard />} />
                 <Route path="/profile" element={<Profile/>} />
                 <Route path="/profile/deposit" element={<Deposit/>} />
