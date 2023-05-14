@@ -81,7 +81,7 @@ const Room = () => {
             rating={800}
             taken={[]}
             timeLeft={180000}
-            username="player 1"
+            username="Opponent"
           />
           <div style={{ maxWidth: '70vh', width: '70vw', margin: '0 auto' }}>
             <Chessboard
@@ -102,7 +102,7 @@ const Room = () => {
             rating={800}
             taken={[]}
             timeLeft={180000}
-            username="player 1"
+            username={user?.nickname || ''}
           />
         </div>
         <History />
