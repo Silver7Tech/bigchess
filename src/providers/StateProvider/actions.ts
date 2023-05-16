@@ -23,9 +23,14 @@ export interface SetOpenModalAction {
   payload: boolean;
 }
 
+export interface SetTableDataAction {
+  type: 'SET_TABLE_DATA';
+  payload: Array<any>;
+}
 export type StateActions =
   | SetPlayerStateAction
   | SetGameModeAction
   | SetTimeModeAction
   | SetDetailModeAction
+  | SetTableDataAction
   | SetOpenModalAction;

@@ -1,5 +1,4 @@
 // import User from '~/assets/img/user_large.png'
-import Edit from '~/assets/img/edit.png'
 import Star from '~/assets/img/Star.png'
 import ModeItem_1 from '~/assets/icons/1.svg'
 import SideBar  from './SideBar'
@@ -9,57 +8,61 @@ import { useAuth } from '~/providers/AuthProvider';
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 
+type ChessResult = 'WIN' | 'LOST';
+type ChessType = {
+    category: string;
+    time: number;
+}
 interface History {
-    type: React.ReactElement;
-    result: React.ReactElement;
-    opponent: React.ReactElement;
-    wager: React.ReactElement;
-    edit?: React.ReactElement; // optional, same as string | undefined
+    type: ChessType;
+    result: ChessResult;
+    opponent: string;
+    wager: number;
+    edit?: string; // optional, same as string | undefined
 }
 const data: History[] = [
-{
-    type: <div className='flex items-center gap-2'><Image source={ModeItem_1}/><div className='flex flex-col'><p className='font-bold'>Standard</p><p>10 min</p></div></div>,
-    result: <h1>WIN</h1>,
-    opponent:<h1>Olivia Rhye</h1>,
-    wager: <h1>$100.00</h1>,
-    edit: <Image source={Edit}/> 
-}, 
-{
-    type: <div className='flex items-center gap-2'><Image source={ModeItem_1}/><div className='flex flex-col'><p className='font-bold'>Standard</p><p>10 min</p></div></div>,
-    result: <h1>WIN</h1>,
-    opponent:<h1>Olivia Rhye</h1>,
-    wager: <h1>$100.00</h1>,
-    edit: <Image source={Edit}/> 
-}, 
-{
-    type: <div className='flex items-center gap-2'><Image source={ModeItem_1}/><div className='flex flex-col'><p className='font-bold'>Standard</p><p>10 min</p></div></div>,
-    result: <h1>WIN</h1>,
-    opponent:<h1>Olivia Rhye</h1>,
-    wager: <h1>$100.00</h1>,
-    edit: <Image source={Edit}/> 
-}, 
-{
-    type: <div className='flex items-center gap-2'><Image source={ModeItem_1}/><div className='flex flex-col'><p className='font-bold'>Standard</p><p>10 min</p></div></div>,
-    result: <h1>WIN</h1>,
-    opponent:<h1>Olivia Rhye</h1>,
-    wager: <h1>$100.00</h1>,
-    edit: <Image source={Edit}/> 
-}, 
-{
-    type: <div className='flex items-center gap-2'><Image source={ModeItem_1}/><div className='flex flex-col'><p className='font-bold'>Standard</p><p>10 min</p></div></div>,
-    result: <h1>WIN</h1>,
-    opponent:<h1>Olivia Rhye</h1>,
-    wager: <h1>$100.00</h1>,
-    edit: <Image source={Edit}/> 
-}, 
-{
-    type: <div className='flex items-center gap-2'><Image source={ModeItem_1}/><div className='flex flex-col'><p className='font-bold'>Standard</p><p>10 min</p></div></div>,
-    result: <h1>WIN</h1>,
-    opponent:<h1>Olivia Rhye</h1>,
-    wager: <h1>$100.00</h1>,
-    edit: <Image source={Edit}/> 
-},
-
+    {
+        type: {category: 'Standard', time: 10},
+        result: 'WIN',
+        opponent:'Olivia Rhye',
+        wager: 100.00,
+        edit: '1' 
+    },
+    {
+        type: {category: 'Standard', time: 10},
+        result: 'WIN',
+        opponent:'Olivia Rhye',
+        wager: 100.00,
+        edit: '1' 
+    },
+    {
+        type: {category: 'Standard', time: 10},
+        result: 'WIN',
+        opponent:'Olivia Rhye',
+        wager: 100.00,
+        edit: '1' 
+    },
+    {
+        type: {category: 'Standard', time: 10},
+        result: 'WIN',
+        opponent:'Olivia Rhye',
+        wager: 100.00,
+        edit: '1' 
+    },
+    {
+        type: {category: 'Standard', time: 10},
+        result: 'WIN',
+        opponent:'Olivia Rhye',
+        wager: 100.00,
+        edit: '1' 
+    },
+    {
+        type: {category: 'Standard', time: 10},
+        result: 'WIN',
+        opponent:'Olivia Rhye',
+        wager: 100.00,
+        edit: '1' 
+    },
 ];
 
 const columns: ColumnDefinitionType<History, keyof History>[] = [

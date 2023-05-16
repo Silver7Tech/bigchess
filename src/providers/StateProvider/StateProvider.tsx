@@ -38,6 +38,11 @@ export const reducer = (
         ...state,
         detailMode: action.payload,
       };
+    case 'SET_TABLE_DATA':
+      return {
+        ...state,
+        tableData: action.payload,
+      };
   }
 };
 
@@ -50,6 +55,7 @@ export const StateContextProvider: React.FC<{
     gameMode: 0,
     timeMode: 0,
     detailMode: 0,
+    tableData: [],
   });
 
   return (
@@ -62,6 +68,7 @@ export const StateContextProvider: React.FC<{
           setTimeMode: (state) => dispatch({ type: 'SET_TIME_MODE', payload: state }),
           setDetailMode: (state) => dispatch({ type: 'SET_DETAIL_MODE', payload: state }),
           setOpenModal: (state) => dispatch({ type: 'SET_MODAL_OPEN', payload: state }),
+          setTableData: (state) => dispatch({ type: 'SET_TABLE_DATA', payload: state }),
         },
       }}
     >
