@@ -5,6 +5,7 @@ export interface ButtonProps extends HTMLProps<HTMLButtonElement> {
   px?: string;
   py?: string;
   icon?: React.ReactNode;
+  icon_direction? : string;
   bg_color?: string;
   text_color?: string;
   className?: string;
@@ -13,6 +14,7 @@ export interface ButtonProps extends HTMLProps<HTMLButtonElement> {
   width?: string;
   height?: string;
   onClick?: () => void;
+  disabled? : boolean;
 }
 export const Button: React.FC<ButtonProps> = ({
   text,
@@ -26,15 +28,19 @@ export const Button: React.FC<ButtonProps> = ({
   text_color = "text-black",
   rounded = "rounded-md",
   className = "",
+  icon_direction = 'left',
   onClick,
+  disabled,
 }: ButtonProps) => {
   return (
     <button
       className={`${px} ${py} ${rounded} ${border} ${className} ${bg_color} ${text_color} ${width} ${height} text-center`}
       onClick={onClick}
+      disabled = {disabled}
     >
-      {icon && <div className="px-1">{icon}</div>}
+      {icon_direction === 'left' && icon && <div className="px-1">{icon}</div>}
       {text}
+      {icon_direction === 'right' && icon && <div className="px-1">{icon}</div>}
     </button>
   );
 };

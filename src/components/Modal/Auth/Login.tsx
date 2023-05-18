@@ -3,7 +3,8 @@ import { LoginSocialGoogle, IResolveParams } from 'reactjs-social-login';
 import { Button, Image, Input } from '~/components/UI/index.ts';
 import { useAuth } from '~/providers/AuthProvider';
 import { useAppState } from '~/providers/StateProvider/StateProvider';
-import { FaGoogle, FaTwitter } from 'react-icons/fa';
+import { FaTwitter } from 'react-icons/fa';
+import { FcGoogle } from 'react-icons/fc'
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
@@ -113,7 +114,7 @@ export const LoginModal: React.FC = () => {
           >
             <Button
               text="Continue with Google"
-              icon={<FaGoogle fill="grey" />}
+              icon={<FcGoogle />}
               height="h-12"
               bg_color="bg-white-100"
               border="border"

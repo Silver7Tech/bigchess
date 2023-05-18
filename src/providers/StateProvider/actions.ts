@@ -27,10 +27,23 @@ export interface SetTableDataAction {
   type: 'SET_TABLE_DATA';
   payload: Array<any>;
 }
+
+export interface SetCurrentPageAction {
+  type: 'SET_CURRENT_PAGE';
+  payload: number;
+}
+
+export interface SetBetAmountAction {
+  type: 'SET_BET_AMOUNT';
+  payload: number;
+}
+
 export type StateActions =
   | SetPlayerStateAction
   | SetGameModeAction
   | SetTimeModeAction
   | SetDetailModeAction
   | SetTableDataAction
+  | SetCurrentPageAction
+  | SetBetAmountAction
   | SetOpenModalAction;

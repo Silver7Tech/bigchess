@@ -4,7 +4,9 @@ export interface StateContextInterface {
   gameMode: number | undefined;
   detailMode: number | undefined;
   timeMode: number | undefined;
+  currentPage: number;
   tableData: Array<any>;
+  betAmount: number;
 }
 
 export interface StateActionsInterface {
@@ -14,4 +16,6 @@ export interface StateActionsInterface {
   setTableData: (state: Array<any>) => void;
   setDetailMode: (state: number) => void;
   setOpenModal: (state: boolean) => void;
+  setCurrentPage: (state: number) => void;
+  setBetAmount: (state: number) => void;
 }

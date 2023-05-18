@@ -23,7 +23,7 @@ export const TableCell = <T, K extends keyof T>({ data, column }: TableCellProps
       return(
         <p>{data[column.key] as any} min</p>
       )
-    case 'betamount':
+    case 'bet_amount':
       return(
         <p>$ {data[column.key] as any}</p>
       )
