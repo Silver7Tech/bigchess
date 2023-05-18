@@ -4,11 +4,8 @@ import { AiOutlineArrowLeft, AiOutlineArrowRight } from 'react-icons/ai';
 import { useAppState } from "~/providers/StateProvider/StateProvider";
 import { usePagination } from "./usePagination";
 import { trpc } from "~/helpers/trpc";
-import { useState } from "react";
-// type Lobby = {
-//     pools: Array<any>,
-//     totalCount: number,
-// }
+import { useEffect, useState } from "react";
+
 export const Pagination: React.FC = () => {
     const [totalCount, setTotalCount] = useState(0)
     const pageSize = 10;
@@ -22,7 +19,10 @@ export const Pagination: React.FC = () => {
         setTableData(data.pools);
         setTotalCount(data.totalCount);
     }
-    getData(currentPage)
+    useEffect(() => {
+        getData(currentPage)
+    },[])
+    
     
     const paginationRange = usePagination({
         currentPage,
