@@ -17,7 +17,7 @@ function App() {
       <AuthProvider>
         <div className="h-screen flex flex-col overflow-hidden">
           <Header />
-          <Suspense fallback={<div>Loading...</div>}>
+          <Suspense fallback={<div className="flex justify-center items-center my-auto font-bold">Loading...</div>}>
             <>
               <Routes>
                 <Route path="/" element={<Home />} />
