@@ -1,15 +1,21 @@
 import { createStore } from '@udecode/zustood';
+export type Ticket = {
+  id: string;
+  session_id: string;
+  game_id?: string;
+  time_control: { limit: number; increment: number };
+};
 interface StateProps {
   limit: number;
   inc: number;
   category: 'blitz' | 'rapid' | 'classical' | 'bullet';
-  isInGame: boolean;
+  ticket: Ticket | null;
 }
 
 const initialStateProps: StateProps = {
-  isInGame: false,
-  limit: 0,
   inc: 0,
+  limit: 0,
+  ticket: null,
   category: 'bullet',
 };
 
