@@ -13,6 +13,7 @@ export interface Session {
   sub?: string;
   uid?: string;
   email?: string;
+  rating?: number;
   roles?: Role[];
   last_attempted_login?: string;
   nb_attempts?: number;
@@ -24,7 +25,7 @@ export interface Session {
 
 type PublicSession = Pick<
   Session,
-  'uid' | 'email' | 'nickname' | 'picture' | 'name' | 'roles'
+  'uid' | 'email' | 'nickname' | 'picture' | 'name' | 'roles' | 'rating'
 > | null;
 
 interface AuthContextProps {
@@ -58,7 +59,19 @@ export const AuthContext = createContext<AuthContextProps>({
 });
 
 export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const { data: user, refetch, isLoading } = useTrpcQuery<any, PublicSession>('auth.me', {});
+  const {
+    data: user,
+    refetch,
+    isLoading,
+  } = useTrpcQuery<any, PublicSession>(
+    'auth.me',
+    {},
+    {
+      onError() {
+        localStorage.removeItem('token');
+      },
+    },
+  );
 
   const { mutate } = useMutation({
     mutationFn() {

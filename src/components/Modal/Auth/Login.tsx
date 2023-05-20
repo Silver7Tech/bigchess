@@ -110,11 +110,7 @@ export const LoginModal: React.FC = () => {
                 nickname: data?.given_name || '',
                 type: provider,
               };
-              console.warn(data);
               googleLogin.mutate(req);
-            }}
-            onReject={(err: any) => {
-              // console.log(err);
             }}
           >
             <Button
