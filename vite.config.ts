@@ -10,9 +10,9 @@ export default defineConfig({
       '~': path.resolve(__dirname, './src/'),
     },
   },
-
   server: {
     port: 8000,
+    host: true,
     open: true,
     strictPort: true,
     proxy: {
