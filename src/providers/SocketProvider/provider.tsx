@@ -1,27 +1,15 @@
-import { PropsWithChildren, useEffect, useRef } from 'react';
+import { PropsWithChildren } from 'react';
 import { io } from 'socket.io-client';
 import { SocketContext } from './context';
-
+const URL = process.env.NODE_ENV === 'production' ? window.location : 'http://localhost:3000';
+const socket = io(URL, {
+  autoConnect: true,
+  path: '/ws',
+  withCredentials: true,
+  auth: {
+    token: `Bearer ${localStorage.getItem('token')}`,
+  },
+});
 export default function SocketProvider({ children }: PropsWithChildren) {
-  const socket = useRef(
-    io({
-      autoConnect: true,
-      path: '/ws',
-      withCredentials: true,
-      auth: {
-        token: `Bearer ${localStorage.getItem('token')}`,
-      },
-    }),
-  ).current;
-
-  useEffect(() => {
-    socket.on('connect', () => {
-      // eslint-disable-next-line no-console
-      console.log(socket.id); // x8WIv7-mJelg7on_ALbx
-      // eslint-disable-next-line no-console
-      console.log(socket.recovered); // true
-    });
-    return () => {};
-  });
   return <SocketContext.Provider value={socket}>{children}</SocketContext.Provider>;
 }
