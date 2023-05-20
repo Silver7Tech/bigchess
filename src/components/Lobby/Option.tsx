@@ -1,11 +1,14 @@
 import { useMutation } from '@tanstack/react-query';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { CATEGORIES } from '~/assets/CONSTANTS';
 import game_modes from '~/assets/game_modes.json';
 import { Button } from '~/components/UI';
 import { ModeItem } from '~/components/UI/ModeItem.ui';
 import { trpc } from '~/helpers/trpc';
 import { GameCategory, GameMode } from '~/interfaces';
+import { appActions } from '~/store';
+import { Ticket } from '~/store/lobby.store';
 import { TimeItem } from '../UI/TimeItem.ui';
 import { PlayingStatus } from './PlayingStatus';
 
@@ -27,6 +30,8 @@ const categorize = () => {
 const categories = categorize();
 
 export const Option = () => {
+  const navigate = useNavigate();
+
   const [state, setState] = useState({
     selected_index: null as number | null,
     selected_category: 'bullet' as GameCategory,
@@ -36,15 +41,18 @@ export const Option = () => {
     mutationFn: async () => {
       const selected = game_modes[state.selected_index!];
       if (!selected) return;
-      return await trpc.mutation('matcher.join', {
-        time_control_limit: selected.duration,
-        time_control_inc: selected.increment,
-      });
+      return (await trpc.mutation('matcher.join', {
+        time_control_limit: selected.duration * 60 * 1000,
+        time_control_inc: (selected.increment || 0) * 1000,
+      })) as Awaited<{ ticket: Ticket }>;
     },
     onError: (error) => {
       console.error(error);
     },
-    onSuccess(data) {
+    onSuccess({ ticket }: any) {
+      if (!ticket) return appActions.lobby.ticket(null);
+      appActions.lobby.ticket(ticket);
+      if (ticket.game_id) return navigate(`/play/${ticket.game_id}`);
     },
   });
 
