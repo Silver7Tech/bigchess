@@ -61,25 +61,6 @@ export const ValidateOTPModal: React.FC = () => {
             />
           </div>
         </form>
-        {/* <div className="flex flex-col gap-4 w-full">
-          <Button
-            text="Continue with Google"
-            icon={<FaGoogle fill="grey" />}
-            height="h-12"
-            bg_color="bg-white-100"
-            border="border"
-            text_color="text-black-100"
-            className="inline-flex items-center justify-center"
-          />
-          <Button
-            text="Continue with Twitter"
-            icon={<FaTwitter />}
-            height="h-12"
-            bg_color="bg-blue-100"
-            text_color="text-white-100"
-            className="inline-flex items-center justify-center"
-          />
-        </div> */}
       </div>
     </div>
   );

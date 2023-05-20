@@ -1,3 +1,8 @@
+export type RowData = {
+  category: string,
+  betAmount: number,
+  time: string,
+}
 export interface StateContextInterface {
   loginState?: 'login' | 'validate' | 'logout' | undefined;
   modalOpen: boolean;
@@ -6,7 +11,7 @@ export interface StateContextInterface {
   timeMode: number | undefined;
   currentPage: number;
   tableData: Array<any>;
-  betAmount: number;
+  rowData: RowData,
 }
 
 export interface StateActionsInterface {
@@ -17,5 +22,5 @@ export interface StateActionsInterface {
   setDetailMode: (state: number) => void;
   setOpenModal: (state: boolean) => void;
   setCurrentPage: (state: number) => void;
-  setBetAmount: (state: number) => void;
+  setRowData: (state: RowData) => void;
 }

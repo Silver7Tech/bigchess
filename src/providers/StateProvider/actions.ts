@@ -1,3 +1,5 @@
+import { RowData } from "./interfaces";
+
 export interface SetPlayerStateAction {
   type: 'SET_LOGIN_STATE';
   payload: 'login' | 'validate' | 'logout' | undefined;
@@ -33,9 +35,9 @@ export interface SetCurrentPageAction {
   payload: number;
 }
 
-export interface SetBetAmountAction {
-  type: 'SET_BET_AMOUNT';
-  payload: number;
+export interface SetRowDataAction {
+  type: 'SET_SELECTED_ROW_DATA';
+  payload: RowData;
 }
 
 export type StateActions =
@@ -45,5 +47,5 @@ export type StateActions =
   | SetDetailModeAction
   | SetTableDataAction
   | SetCurrentPageAction
-  | SetBetAmountAction
+  | SetRowDataAction
   | SetOpenModalAction;

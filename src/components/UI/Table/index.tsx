@@ -7,7 +7,7 @@ export type ColumnDefinitionType<T, K extends keyof T> = {
 }
 
 type TableProps<T, K extends keyof T> = {
-  data: Array<T>;
+  data: Array<T & {timecontrol_inc? : number, timecontrol_limit? :number, timeclass? :string}>;
   columns: Array<ColumnDefinitionType<T, K>>;
   headClass?: string;
   bodyClass?: string;
