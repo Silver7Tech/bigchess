@@ -41,7 +41,7 @@ const Header: FC = () => {
             <LinkButton text="Play game" to="/play" actived={pathname.includes('play')} />
           </li>
           <li>
-            <LinkButton text="Game Modes" to="/mode" actived={pathname.includes('mode')} />
+            <LinkButton text="Pools" to="/pools" actived={pathname.includes('pools')} />
           </li>
           <li>
             <LinkButton text="Leaderboard" to="/leaderboard" actived={pathname.includes('board')} />

@@ -5,6 +5,8 @@ import Edit from '~/assets/img/edit.png';
 import { useAuth } from '~/providers/AuthProvider';
 import { ColumnDefinitionType, Image, Table } from '../UI';
 import { Bullet } from '~/assets/icons';
+import { useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 interface History {
   type: React.ReactElement;
@@ -131,7 +133,13 @@ const columns: ColumnDefinitionType<History, keyof History>[] = [
 ];
 
 const ProfileDetails: React.FC = () => {
-  const { user } = useAuth();
+  const { user, isAuthenticated } = useAuth();
+    const navigate = useNavigate();
+    useEffect(() => {
+        if(!isAuthenticated()){
+            navigate('/');
+        }
+    },[])
   return (
     <div className="ml-10 pr-14 w-full overflow-y-auto overflow-x-hidden max-h-[83vh]">
       <div className="flex items-center gap-6">

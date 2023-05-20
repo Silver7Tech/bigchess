@@ -1,14 +1,16 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { lazy, Suspense, useState } from 'react';
-import { Route, Routes, Navigate } from 'react-router-dom';
+import { Suspense, lazy, useState } from 'react';
+import { Route, Routes } from 'react-router-dom';
 import Header from '~/components/Header';
+import Lobby from './components/Lobby';
+import ComingSoon, { NotFound } from './components/UI/ComingSoon.ui';
 import { AuthProvider } from './providers/AuthProvider';
 import ErrorBoundary from './providers/ErrorBoundary';
 import { SocketProvider } from './providers/SocketProvider';
-import Lobby from './components/Lobby';
 function App() {
+  const Home = lazy(() => import('./components/Home'));
   const Room = lazy(() => import('./components/Room'));
-  const GameMode = lazy(() => import('./components/GameMode'));
+  const Pools = lazy(() => import('./components/Pools'));
   const Leaderboard = lazy(() => import('./components/Leaderboard'));
   const ProfileDetails = lazy(() => import('./components/Detail/Profile'));
   const Profile = lazy(() => import('./components/Detail'));
@@ -28,19 +30,20 @@ function App() {
                 }
               >
                 <Routes>
-                  <Route index element={<Room />} />
-                  <Route path="play" element={<Lobby />}>
-                    <Route path="play/online/:roomId" element={<Room />} />
-                    <Route path="play/offline" element={<div>Test</div>} />
+                  <Route path="/" element={<Home />} />
+                  <Route path="play">
+                    <Route index element={<Lobby />} />
+                    <Route path="offline" element={<ComingSoon />} />
+                    <Route path=":roomId" element={<Room />} />
                   </Route>
-                  <Route path="/mode" element={<GameMode />} />
-                  <Route path="/leaderboard" element={<Leaderboard />} />
-                  <Route path="/profile" element={<Profile />}>
+                  <Route path="pools" element={<Pools />} />
+                  <Route path="leaderboard" element={<Leaderboard />} />
+                  <Route path="profile" element={<Profile />}>
                     <Route path="" element={<ProfileDetails />} />
                     <Route path="deposit" element={<Deposit />} />
                     <Route path="preferences" element={<Preferences />} />
                   </Route>
-                  <Route path="/*" element={<Navigate to="/" />} />
+                  <Route path="*" element={<NotFound />} />
                 </Routes>
               </Suspense>
             </div>

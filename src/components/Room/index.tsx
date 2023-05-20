@@ -86,11 +86,11 @@ const Room = () => {
           <div style={{ maxWidth: '70vh', width: '70vw', margin: '0 auto' }}>
             <Chessboard
               id={'board'}
+              customSquare={Square}
               animationDuration={300}
-              isDraggablePiece={() => false}
               arePremovesAllowed={false}
               customPieces={customPieces}
-              customSquare={Square}
+              isDraggablePiece={() => false}
               customDarkSquareStyle={customDarkSquareStyle}
               customLightSquareStyle={customLightSquareStyle}
             />
