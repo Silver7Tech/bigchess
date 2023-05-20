@@ -34,7 +34,7 @@ function App() {
                   <Route path="play">
                     <Route index element={<Lobby />} />
                     <Route path="offline" element={<ComingSoon />} />
-                    <Route path=":roomId" element={<Room />} />
+                    <Route path=":gameId" element={<Room />} />
                   </Route>
                   <Route path="pools" element={<Pools />} />
                   <Route path="leaderboard" element={<Leaderboard />} />
