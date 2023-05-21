@@ -93,7 +93,14 @@ const Pools: React.FC = () => {
           <Image source={Clock}/>
           <p className="text-base">{state.rowData.time}</p>
         </div>
-        <p className="text-[64px] font-bold text-[#0151FF]">${state.rowData.betAmount}</p>
+        <p className="text-[64px] font-bold text-[#0151FF]">
+          {
+            0 < state.rowData.betAmount && state.rowData.betAmount < 1 ?
+            '¢' + state.rowData.betAmount*100
+            :
+            '$' + state.rowData.betAmount
+          }
+        </p>
         <div className="flex justify-between items-center w-full px-1 text-[#667085]">
           <div>
             <span className="text-xs">Player queue:</span> 

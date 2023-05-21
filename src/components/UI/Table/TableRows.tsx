@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { ColumnDefinitionType } from '.';
 import { TableCell } from './TableCell';
 import { useAppState } from '~/providers/StateProvider/StateProvider';
@@ -25,6 +26,10 @@ const TableRows = <T, K extends keyof T>({ data, columns, bodyClass, selectable 
       
     }
   }
+  useEffect(() => {
+    if(data.length > 0)
+      getRow(data[0], selectable);
+  },[data])
   const rows = data.map((row, index) => {
     return (
       <tr key={`row-${index}`} onClick={() => getRow(row, selectable)}  className={`h-16 ${index % 2 === 0 ? 'bg-gray-100' : ''} ${selectable === true? "hover:bg-[#50A3FF]" : ""}`}>

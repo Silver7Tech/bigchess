@@ -73,7 +73,6 @@ export const TableCell = <T, K extends keyof T>({ data, column }: TableCellProps
       )
     case 'bet_amount':
       const value = data[column.key] as number;
-      console.warn(value);
       return(
         <p>
           {
