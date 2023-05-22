@@ -12,6 +12,7 @@ interface StateProps {
   ticket: Ticket | null;
   tableData: any[];
   currentPage: number;
+  totalCount: number;
   rowData: {
     category: string;
     betAmount: number;
@@ -26,6 +27,7 @@ const initialStateProps: StateProps = {
   category: 'bullet',
   tableData: [],
   currentPage: 1,
+  totalCount: 0,
   rowData: {
     category: '',
     betAmount: 0,

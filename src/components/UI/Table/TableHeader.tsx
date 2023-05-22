@@ -7,7 +7,7 @@ export type TableHeaderProps<T, K extends keyof T> = {
 const TableHeader = <T, K extends keyof T>({ columns, headClass }: TableHeaderProps<T, K>): JSX.Element => {
   const headers = columns.map((column, index) => {
     return (
-      <th key={`headCell-${index}`} className={`${index === 0 ? 'pl-4' : ''}`}>
+      <th key={`headCell-${index}`} className={`text-center`}>
         {column.header}
       </th>
     );

@@ -5,10 +5,11 @@ export interface LinkButtonProps {
   text: string;
   to: string;
   actived?: boolean;
+  onClick? : () => void;
 }
 
 export const LinkButton = forwardRef<HTMLAnchorElement, LinkButtonProps>(
-  ({ text, to, actived = false }, ref) => {
+  ({ text, to, actived = false, onClick }, ref) => {
     return (
       <HashLink
         ref={ref}
@@ -16,6 +17,7 @@ export const LinkButton = forwardRef<HTMLAnchorElement, LinkButtonProps>(
         className={`font-semibold leading-loose text-black ${
           actived && 'underline text-purple-100'
         }`}
+        onClick={onClick}
       >
         {text}
       </HashLink>

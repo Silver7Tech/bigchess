@@ -22,7 +22,7 @@ export const TableCell = <T, K extends keyof T>({
     case 'category':
       const type = data.timeclass as string;
       return (
-        <div className=" flex items-center gap-2 font-bold">
+        <div className=" flex justify-center items-center gap-2 font-bold">
           {type === 'bullet' ? (
             <>
               <div className="flex items-center  justify-center bg-[#1eaaff33] w-[40px] h-[40px] rounded-full">
@@ -60,23 +60,23 @@ export const TableCell = <T, K extends keyof T>({
       const inc = data.timecontrol_inc;
       const limit = data.timecontrol_limit;
       return (
-        <p>
+        <p className='text-center'>
           {inc === 0 ? limit?.toString() + ' Min' : limit?.toString() + ' | ' + inc?.toString()}
         </p>
       );
     case 'bet_amount':
       const value = data[column.key] as number;
-      return <p>{0 < value && value < 1 ? '¢' + value * 100 : '$' + value}</p>;
+      return <p className='text-center'>{0 < value && value < 1 ? '¢' + value * 100 : '$' + value}</p>;
     case 'participants':
-      return <p>{0 | (data[column.key] as any)}</p>;
+      return <p className='text-center'>{0 | (data[column.key] as any)}</p>;
     case 'status':
       return (
-        <p className="text-xs text-[#12B76A] bg-[#ECFDF3] w-[65px] rounded-lg py-[1px] text-center">
+        <p className="text-xs text-[#12B76A] bg-[#ECFDF3] w-[65px] rounded-lg py-[1px] text-center mx-auto ">
           &#x2022;{' Active'}
         </p>
       );
     case 'queue':
-      return <p>{0 | (data[column.key] as any)}</p>;
+      return <p className='text-center'>{0 | (data[column.key] as any)}</p>;
     case 'type':
       const temp_cell = data[column.key] as ChessType;
       return (
