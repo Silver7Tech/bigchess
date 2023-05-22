@@ -38,6 +38,21 @@ export const reducer = (
         ...state,
         detailMode: action.payload,
       };
+    case 'SET_TABLE_DATA':
+      return {
+        ...state,
+        tableData: action.payload,
+      };
+    case 'SET_CURRENT_PAGE':
+      return {
+        ...state,
+        currentPage: action.payload,
+      };
+    case 'SET_SELECTED_ROW_DATA':
+      return {
+        ...state,
+        rowData: action.payload,
+      };
   }
 };
 
@@ -50,6 +65,13 @@ export const StateContextProvider: React.FC<{
     gameMode: 0,
     timeMode: 0,
     detailMode: 0,
+    tableData: [],
+    currentPage: 1,
+    rowData: {
+      category: '',
+      betAmount: 0,
+      time: '',
+    },
   });
 
   return (
@@ -62,6 +84,9 @@ export const StateContextProvider: React.FC<{
           setTimeMode: (state) => dispatch({ type: 'SET_TIME_MODE', payload: state }),
           setDetailMode: (state) => dispatch({ type: 'SET_DETAIL_MODE', payload: state }),
           setOpenModal: (state) => dispatch({ type: 'SET_MODAL_OPEN', payload: state }),
+          setTableData: (state) => dispatch({ type: 'SET_TABLE_DATA', payload: state }),
+          setCurrentPage: (state) => dispatch({ type: 'SET_CURRENT_PAGE', payload: state }),
+          setRowData: (state) => dispatch({ type: 'SET_SELECTED_ROW_DATA', payload: state }),
         },
       }}
     >
