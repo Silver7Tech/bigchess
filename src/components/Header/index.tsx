@@ -27,6 +27,11 @@ const Header: FC = () => {
     navigate('/profile');
     appActions.profile.currentTab('profile');
   };
+  const goTo = () => {
+    if(!isAuthenticated()){
+      appActions.auth.isModalOpen(true);
+    }
+  }
   return (
     <div className="md:px-4 py-2 px-2 bg-brand-800 top-0 flex items-stretch justify-between max-sm:text-sm z-50 border sticky">
       <HashLink to={'/'}>
@@ -41,10 +46,10 @@ const Header: FC = () => {
             <LinkButton text="Play game" to="/play" actived={pathname.includes('play')} />
           </li>
           <li>
-            <LinkButton text="Pools" to="/pools" actived={pathname.includes('pools')} />
+            <LinkButton text="Pools" to={ isAuthenticated() ? "/pools": "/" }  actived={pathname.includes('pools')} onClick={goTo}/>
           </li>
           <li>
-            <LinkButton text="Leaderboard" to="/leaderboard" actived={pathname.includes('board')} />
+            <LinkButton text="Leaderboard" to={ isAuthenticated() ? "/leaderboard": "/" } actived={pathname.includes('board')} onClick={goTo} />
           </li>
         </ul>
       </nav>
