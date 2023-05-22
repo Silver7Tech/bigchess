@@ -6,6 +6,7 @@ export interface ButtonProps extends HTMLProps<HTMLButtonElement> {
   px?: string;
   py?: string;
   icon?: React.ReactNode;
+  icon_direction?: string;
   bg_color?: string;
   text_color?: string;
   className?: string;
@@ -16,6 +17,7 @@ export interface ButtonProps extends HTMLProps<HTMLButtonElement> {
   bg_colorHover?: string;
   text_colorHover?: string;
   onClick?: () => void;
+  disabled?: boolean;
 }
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   (
@@ -31,7 +33,9 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       text_color = 'text-black',
       rounded = 'rounded-md',
       className = '',
+      icon_direction = 'left',
       onClick,
+      disabled,
       ...props
     }: ButtonProps,
     ref,
@@ -46,9 +50,11 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
           `hover:${props.bg_colorHover} hover:${props.text_colorHover}}`,
         )}
         onClick={onClick}
+        disabled={disabled}
       >
-        {icon && <div className="px-1">{icon}</div>}
+        {icon_direction === 'left' && icon && <div className="px-1">{icon}</div>}
         {text}
+        {icon_direction === 'right' && icon && <div className="px-1">{icon}</div>}
       </button>
     );
   },

@@ -10,6 +10,13 @@ interface StateProps {
   inc: number;
   category: 'blitz' | 'rapid' | 'classical' | 'bullet';
   ticket: Ticket | null;
+  tableData: any[];
+  currentPage: number;
+  rowData: {
+    category: string;
+    betAmount: number;
+    time: string;
+  };
 }
 
 const initialStateProps: StateProps = {
@@ -17,6 +24,13 @@ const initialStateProps: StateProps = {
   limit: 0,
   ticket: null,
   category: 'bullet',
+  tableData: [],
+  currentPage: 1,
+  rowData: {
+    category: '',
+    betAmount: 0,
+    time: '',
+  },
 };
 
 function getInitialState(): StateProps {

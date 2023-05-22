@@ -1,6 +1,7 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
-import { FaGoogle, FaTwitter } from 'react-icons/fa';
+import { FaTwitter } from 'react-icons/fa';
+import { FcGoogle } from 'react-icons/fc';
 import { useNavigate } from 'react-router-dom';
 import { IResolveParams, LoginSocialGoogle } from 'reactjs-social-login';
 import * as Yup from 'yup';
@@ -115,7 +116,7 @@ export const LoginModal: React.FC = () => {
           >
             <Button
               text="Continue with Google"
-              icon={<FaGoogle fill="grey" />}
+              icon={<FcGoogle />}
               height="h-12"
               bg_color="bg-white-100"
               border="border"
