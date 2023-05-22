@@ -3,18 +3,17 @@ import { Button } from '../..';
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from 'react-icons/ai';
 import { usePagination } from './usePagination';
 import { trpc } from '~/helpers/trpc';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { appActions, appStore } from '~/store';
 
 export const Pagination: React.FC = () => {
-  const [totalCount, setTotalCount] = useState(0);
-  const pageSize = 10;
+  const pageSize = 8;
   const siblingCount = 1;
   const currentPage = appStore.lobby.use.currentPage();
   const getData = async (currentPage: number) => {
     const data: any = await trpc.query('lobby.pools', { currentPage, pageSize });
     appActions.lobby.tableData(data.pools);
-    setTotalCount(data.totalCount);
+    appActions.lobby.totalCount(data.totalCount);
   };
   useEffect(() => {
     getData(currentPage);
@@ -22,7 +21,7 @@ export const Pagination: React.FC = () => {
 
   const paginationRange = usePagination({
     currentPage,
-    totalCount,
+    totalCount: appStore.lobby.use.totalCount(),
     siblingCount,
     pageSize,
   });

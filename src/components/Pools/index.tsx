@@ -5,7 +5,10 @@ import { Pagination } from '../UI/Table/TableSearchMode/Pagination';
 import { Image } from '../UI';
 import Clock from '~/assets/img/time.png';
 import { Bullet, Blitz, Rapid, Standard } from '../UI/SVG_ICONS';
+import { useAuth } from '~/providers/AuthProvider';
+import { useNavigate } from 'react-router-dom';
 import { appStore } from '~/store';
+import { useEffect } from 'react';
 type Category = 'Bullet' | 'Blitz' | 'Rapid';
 
 interface Pool {
@@ -47,6 +50,14 @@ const columns: ColumnDefinitionType<Pool, keyof Pool>[] = [
 
 const Pools: React.FC = () => {
   const lobby = appStore.lobby.useTrackedStore();
+  const totalCount = appStore.lobby.use.totalCount();
+  const navigate = useNavigate();
+  const { isAuthenticated } = useAuth();
+  useEffect(() => {
+    if(!isAuthenticated()){
+      navigate('/');
+    }
+  }, [])
   return (
     <div className="my-auto mx-12 grid grid-cols-12">
       <div className="flex flex-col justify-center border-[1px] py-6 h-fit col-span-8 border-[#B4C7D8] shadow-3xl rounded-xl">
@@ -54,7 +65,7 @@ const Pools: React.FC = () => {
           <div className="space-x-2">
             <span className="text-lg font-medium">Active Pools</span>
             <span className="bg-[#F9F5FF] rounded-xl px-2 py-1 text-xs text-purple-100 ">
-              125 Pools
+              {totalCount} Pools
             </span>
           </div>
           <div>
@@ -80,15 +91,15 @@ const Pools: React.FC = () => {
             <Bullet fill="#FFFFFF" />
           </div>
         ) : lobby.rowData?.category === 'blitz' ? (
-          <div>
+          <div className="rounded-full bg-[#0151FF] w-[40px] h-[40px] flex items-center justify-center">
             <Blitz fill="#FFFFFF" />
           </div>
         ) : lobby.rowData?.category === 'rapid' ? (
-          <div>
+          <div className="rounded-full bg-[#0151FF] w-[40px] h-[40px] flex items-center justify-center">
             <Rapid fill="#FFFFFF" />
           </div>
         ) : lobby.rowData?.category === 'standard' ? (
-          <div>
+          <div className="rounded-full bg-[#0151FF] w-[40px] h-[40px] flex items-center justify-center">
             <Standard fill="#FFFFFF" />
           </div>
         ) : (
