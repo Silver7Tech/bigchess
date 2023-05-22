@@ -8,7 +8,7 @@ export default function Panel(props: {
 }) {
   return (
     <div
-      style={{ height: '90%', ...props.containerStyles }}
+      style={{ ...props.containerStyles }}
       className={`border border-sky-600 flex flex-col rounded-md overflow-hidden`}
     >
       <div className="p-5 pb-4 border-b border-gray-200">{props.header}</div>

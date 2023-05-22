@@ -28,7 +28,7 @@ const Header: FC = () => {
     appActions.profile.currentTab('profile');
   };
   return (
-    <div className="md:px-4 py-2 px-2 bg-brand-800 top-0 flex items-stretch justify-between max-sm:text-sm z-50 border header">
+    <div className="md:px-4 py-2 px-2 bg-brand-800 top-0 flex items-stretch justify-between max-sm:text-sm z-50 border sticky">
       <HashLink to={'/'}>
         <div className="flex justify-center items-center">
           <Image source={Logo} />

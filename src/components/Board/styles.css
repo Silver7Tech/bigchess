@@ -1,0 +1,14 @@
+.board-container {
+  width: 90vw;
+  max-width: calc(80vh);
+  margin: 0 auto;
+  user-select: none;
+}
+
+@media screen and (min-width: 768px) {
+  .board-container {
+    max-width: calc(70vh);
+    width: 70vw;
+    margin: 0 auto;
+  }
+}

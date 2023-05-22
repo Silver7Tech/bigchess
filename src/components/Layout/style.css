@@ -1,0 +1,28 @@
+.layout-template {
+  display: grid;
+  grid-template-areas:
+    'center'
+    'right'
+    'left';
+}
+
+.layout-left {
+  grid-area: left;
+}
+
+.layout-center {
+  grid-area: center;
+}
+
+.layout-right {
+  grid-area: right;
+}
+
+@media screen and (min-width: 768px) {
+  .layout-template {
+    grid-template-columns: repeat(auto-fit, minmax(min-content, 1fr));
+    justify-items: stretch;
+    align-items: stretch;
+    grid-template-areas: 'left center right';
+  }
+}
