@@ -1,47 +1,75 @@
-import { Chessboard } from "react-chessboard";
-import { ChatRoom } from "~/components/Room/ChatRoom";
-import { GamePool } from "~/components/Room/GamePool";
-import { Option } from "~/components/Room/Option";
-import { PlayingStatus } from "~/components/Room/PlayingStatus";
+import { useAuth } from '~/providers/AuthProvider';
+import Board from '../Board';
+import History from '../History';
+import Layout from '../Layout';
+import { ChatRoom } from './ChatRoom';
+import useGame, { roomState } from './useGame';
+import { Move } from 'chess.js';
+import Summary from '../Modal/Summary';
+import { Content, Dialog } from '@radix-ui/react-dialog';
 
-export interface RoomInterface {
-  isPlaying: boolean;
-}
+// const pieces = {
+//   wK: () => <King width={14} color="white" />,
+//   wQ: () => <Queen width={14} color="white" />,
+//   wB: () => <Bishop width={14} color="white" />,
+//   wN: () => <Knight width={14} color="white" />,
+//   wR: () => <Rook width={14} color="white" />,
+//   wP: () => <Pawn width={14} color="white" />,
+//   bK: () => <King width={14} />,
+//   bQ: () => <Queen width={14} />,
+//   bB: () => <Bishop width={14} />,
+//   bN: () => <Knight width={14} />,
+//   bR: () => <Rook width={14} />,
+//   bP: () => <Pawn width={14} />,
+// };
 
-const Room: React.FC<RoomInterface> = ({ isPlaying }: RoomInterface) => {
-  // const [ isPlaying, setIsPlaying ] = useState(true)
+const Room = () => {
+  const { user } = useAuth();
+  const room = roomState.useTrackedStore();
+  const { isLoading, move } = useGame();
+
+  const onChange = (_fen: string, m: Move) => {
+    move(m.from, m.to);
+  };
+
+  if (isLoading) return <div>Loading...</div>;
+
   return (
-    <div className="my-auto">
-      <div className="grid grid-cols-12 place-content-center gap-6">
-        <div className="col-span-2" />
-        {isPlaying ? <ChatRoom /> : <GamePool />}
-        <div className="col-span-4">
-          {isPlaying ? (
-            <Chessboard
-              id="BasicBoard"
-              customDarkSquareStyle={{ backgroundColor: "#B7C0D8" }}
-              customLightSquareStyle={{ backgroundColor: "#E8EDF9" }}
-            />
-          ) : (
-            <Chessboard
-              id="BasicBoard"
-              customDarkSquareStyle={{ backgroundColor: "#B7C0D8" }}
-              customLightSquareStyle={{ backgroundColor: "#E8EDF9" }}
-              arePiecesDraggable={false}
-            />
-          )}
-        </div>
-        <Option isPlaying={isPlaying} />
-        <div className="col-span-3" />
-      </div>
-      <div className="grid grid-cols-12 fixed bottom-4 w-full">
-        <div className="col-span-7" />
-        <div className="col-span-3 ml-auto mr-3">
-          <PlayingStatus />
-        </div>
-        <div className="col-span-2" />
-      </div>
-    </div>
+    <>
+      <Layout
+        left={<ChatRoom />}
+        center={
+          <Board
+            isWhite={room.isWhite}
+            fen={room.fen}
+            onChange={onChange}
+            player={{
+              rating: user?.rating,
+              picture: user?.picture,
+              username: user?.nickname,
+              clockms: room.player_clockms,
+            }}
+            opponent={{
+              rating: room.opponent?.rating,
+              picture: room.opponent?.picture,
+              username: room.opponent?.username,
+              clockms: room.opponent_clockms,
+            }}
+          />
+        }
+        right={<History />}
+      />
+      <Dialog open={room.isOpen} onOpenChange={(open) => roomState.set.isOpen(open)}>
+        <Content>
+          <Summary
+            isAborted={false}
+            isDraw={false}
+            isWinner={room.isWinner}
+            rating={user?.rating || 0}
+          />
+        </Content>
+      </Dialog>
+    </>
   );
 };
 

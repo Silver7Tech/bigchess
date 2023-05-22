@@ -1,18 +1,19 @@
-import { useMutation } from "@tanstack/react-query";
-import React, { createContext, ReactNode } from "react";
-import { trpc } from "~/helpers/trpc";
-import { useTrpcQuery } from "~/hooks/useTrpcQuery";
+import { useMutation } from '@tanstack/react-query';
+import React, { createContext, ReactNode } from 'react';
+import { trpc } from '~/helpers/trpc';
+import { useTrpcQuery } from '~/hooks/useTrpcQuery';
 
 export enum Role {
-  USER = "USER",
-  ADMIN = "ADMIN",
-  DEVELOPER = "DEVELOPER",
+  USER = 'USER',
+  ADMIN = 'ADMIN',
+  DEVELOPER = 'DEVELOPER',
 }
 
 export interface Session {
   sub?: string;
   uid?: string;
   email?: string;
+  rating?: number;
   roles?: Role[];
   last_attempted_login?: string;
   nb_attempts?: number;
@@ -24,7 +25,7 @@ export interface Session {
 
 type PublicSession = Pick<
   Session,
-  "uid" | "email" | "nickname" | "picture" | "name" | "roles"
+  'uid' | 'email' | 'nickname' | 'picture' | 'name' | 'roles' | 'rating'
 > | null;
 
 interface AuthContextProps {
@@ -57,18 +58,24 @@ export const AuthContext = createContext<AuthContextProps>({
   },
 });
 
-export const AuthProvider: React.FC<{ children: ReactNode }> = ({
-  children,
-}) => {
+export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const {
     data: user,
     refetch,
     isLoading,
-  } = useTrpcQuery<any, PublicSession>("auth.me", {});
+  } = useTrpcQuery<any, PublicSession>(
+    'auth.me',
+    {},
+    {
+      onError() {
+        localStorage.removeItem('token');
+      },
+    },
+  );
 
   const { mutate } = useMutation({
     mutationFn() {
-      return trpc.mutation("auth.signout");
+      return trpc.mutation('auth.signout');
     },
     onSuccess() {
       refetch();
@@ -77,12 +84,12 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
 
   function signOut() {
     mutate();
-    localStorage.removeItem("token");
-    window.location.href = "/";
+    localStorage.removeItem('token');
+    window.location.href = '/';
   }
 
   function getToken() {
-    return localStorage.getItem("token");
+    return localStorage.getItem('token');
   }
 
   function hasOneOfRoles(...roles: Role[]): boolean {
@@ -114,7 +121,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
 export const useAuth = (): AuthContextProps => {
   const context = React.useContext(AuthContext);
   if (context === undefined) {
-    throw new Error("useAuth must be used within a AuthProvider");
+    throw new Error('useAuth must be used within a AuthProvider');
   }
   return context;
 };

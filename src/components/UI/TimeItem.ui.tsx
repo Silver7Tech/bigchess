@@ -1,27 +1,25 @@
-import { useAppState } from "~/providers/StateProvider/StateProvider";
+import { GameMode } from '~/interfaces';
 
 export interface TimeItemProps {
-  time: React.ReactNode;
+  mode: GameMode;
   activated?: boolean;
-  time_mode: number;
+  onActivated?: () => void;
 }
 
 export const TimeItem: React.FC<TimeItemProps> = ({
-  time,
+  mode,
   activated,
-  time_mode,
+  onActivated,
 }: TimeItemProps) => {
-  const {
-    actions: { setTimeMode },
-  } = useAppState();
+  const label = mode.increment ? `${mode.duration} / ${mode.increment}` : `${mode.duration}min`;
   return (
     <div
       className={`w-[64px] h-[64px] rounded-md flex items-center justify-center border cursor-pointer ${
-        activated ? "bg-red-100" : "bg-white"
+        activated ? 'bg-red-100' : 'bg-white'
       }`}
-      onClick={() => setTimeMode(time_mode)}
+      onClick={onActivated}
     >
-      {time}
+      {label}
     </div>
   );
 };

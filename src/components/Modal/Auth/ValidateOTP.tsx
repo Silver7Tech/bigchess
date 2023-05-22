@@ -7,7 +7,8 @@ import Logo from '~/assets/img/logo_large.png';
 import { Button, Image, Input } from '~/components/UI';
 import { trpc } from '~/helpers/trpc';
 import { useAuth } from '~/providers/AuthProvider';
-import { useAppState } from '~/providers/StateProvider/StateProvider';
+import { appActions } from '~/store';
+
 const schema = Yup.object({
   code: Yup.string()
     .length(6)
@@ -17,7 +18,7 @@ const schema = Yup.object({
 export const ValidateOTPModal: React.FC = () => {
   const navigate = useNavigate();
   const { getUser } = useAuth();
-  const { actions } = useAppState();
+
   const { register, handleSubmit, formState } = useForm({
     resolver: yupResolver(schema),
     defaultValues: {
@@ -28,7 +29,8 @@ export const ValidateOTPModal: React.FC = () => {
   const { mutate } = useMutation({
     mutationFn: async (data: { code: string }) => await trpc.mutation('auth.verifyOTP', data),
     onSuccess: () => {
-      actions.setOpenModal(false);
+      appActions.auth.isModalOpen(false);
+      appActions.auth.step('login');
       getUser();
       navigate('/');
     },

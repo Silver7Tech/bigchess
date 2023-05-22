@@ -7,10 +7,11 @@ export interface LinkButtonProps {
   actived?: boolean;
 }
 
-export const LinkButton: React.FC<LinkButtonProps> = forwardRef(
-  ({ text, to, actived = false }: LinkButtonProps, _ref) => {
+export const LinkButton = forwardRef<HTMLAnchorElement, LinkButtonProps>(
+  ({ text, to, actived = false }, ref) => {
     return (
       <HashLink
+        ref={ref}
         to={to}
         className={`font-semibold leading-loose text-black ${
           actived && 'underline text-purple-100'

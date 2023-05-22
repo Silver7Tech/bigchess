@@ -1,22 +1,17 @@
 import { Content, Overlay, Portal } from '@radix-ui/react-dialog';
 import { LoginModal } from '~/components/Modal/Auth/Login';
-import { useAppState } from '~/providers/StateProvider/StateProvider';
 import './styles.css';
 import { ValidateOTPModal } from './ValidateOTP';
-import LogoutModal from './Logout';
+import { useStore } from '~/store';
 
 const ConditionalRender = () => {
-  const {
-    state: { loginState },
-  } = useAppState();
+  const loginState = useStore().auth.step();
 
   switch (loginState) {
     case 'login':
       return <LoginModal />;
     case 'validate':
       return <ValidateOTPModal />;
-    case 'logout':
-      return <LogoutModal />;
     default:
       return null;
   }
