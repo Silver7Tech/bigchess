@@ -1,10 +1,8 @@
-import { Button, Table } from '../UI';
-import { ColumnDefinitionType } from '../UI';
-import { SortButton } from '../UI/Table/TableSearchMode/SortButton';
-import { Pagination } from '../UI/Table/TableSearchMode/Pagination';
-import { Image } from '../UI';
+import { SortButton } from '~/components/UI/Table/TableSearchMode/SortButton';
+import { Pagination } from '~/components/UI/Table/TableSearchMode/Pagination';
+import { Image, Button, Table, ColumnDefinitionType } from '~/components/UI';
 import Clock from '~/assets/img/time.png';
-import { Bullet, Blitz, Rapid, Standard } from '../UI/SVG_ICONS';
+import { Bullet, Blitz, Rapid, Standard } from '~/components/UI/SVG_ICONS';
 import { appStore } from '~/store';
 type Category = 'Bullet' | 'Blitz' | 'Rapid' | 'Standard';
 
@@ -21,7 +19,6 @@ const columns: ColumnDefinitionType<Pool, keyof Pool>[] = [
   {
     key: 'category',
     header: 'Category',
-    width: 150,
   },
   {
     key: 'time',

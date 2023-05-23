@@ -1,9 +1,9 @@
-// import User from '~/assets/img/user_large.png'
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Achievement, HistoryIcon  } from '~/assets/icons'
 import { useAuth } from '~/providers/AuthProvider'
-import { ColumnDefinitionType, Image, Table, Star } from '../UI'
+import { ColumnDefinitionType, Image, Table, Star } from '~/components/UI'
+// import { Pagination } from '../UI/Table/TableSearchMode/Pagination';
 type ChessResult = 'Won' | 'LOST';
 
 interface History {
@@ -116,7 +116,7 @@ const ProfileDetails: React.FC = () => {
   return (
     <div className='ml-10 w-[70vw] h-[88vh] border rounded-md'>
       <div className='border-b w-full py-4 px-6 font-medium text-lg'>
-        Account Detail
+        Account Details
       </div>
       <div className="w-full overflow-y-auto overflow-x-hidden p-6 max-h-[81vh]">
         <div className="flex items-center gap-6">
@@ -133,9 +133,10 @@ const ProfileDetails: React.FC = () => {
             {
               achievementList.length > 0
               ?
-              achievementList?.map((achievement) => {
+              achievementList?.map((achievement, index) => {
                 return(
                   <Star
+                    key={index}
                     text= {achievement.category}
                     score={achievement.score}
                   />
@@ -148,8 +149,8 @@ const ProfileDetails: React.FC = () => {
         </div>
         <div className="mt-5">
           <p className="flex items-center gap-2 font-bold text-base my-6"><HistoryIcon />History</p>
-          <div className='flex flex-col justify-center border-[1px] h-fit col-span-8 border-[#B4C7D8] shadow-3xl rounded-xl'>
-            <div className="space-x-2 px-4 py-4">
+          <div className='flex flex-col justify-center border-[1px] py-4 h-fit col-span-8 border-[#B4C7D8] shadow-3xl rounded-xl'>
+            <div className="space-x-2 px-4 pb-4">
               <span className="text-lg font-medium">Past Matches</span>
               <span className="bg-[#F9F5FF] rounded-xl px-2 py-1 text-xs text-purple-100 ">
                  125 Matches
@@ -162,6 +163,8 @@ const ProfileDetails: React.FC = () => {
               tableClass="table-fixed"
               selectable
             />
+            <p className="bg-[#E4E7EC] h-[1px] w-full mb-4"></p>
+            {/* <Pagination /> */}
           </div>
         </div>
       </div>
