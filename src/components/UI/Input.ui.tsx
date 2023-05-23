@@ -27,7 +27,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
   } = props;
   const classes = `${border} ${rounded} ${width} ${height} ${className}`;
   return (
-    <>
+    <div className="flex flex-col">
       <input
         ref={ref}
         {...rest}
@@ -40,7 +40,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
         }}
         placeholder={placeholder}
       />
-      {error}
-    </>
+      <p className="text-[#9e2146]">{error}</p>
+    </div>
   );
 });
