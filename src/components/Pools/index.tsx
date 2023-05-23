@@ -6,7 +6,7 @@ import { Image } from '../UI';
 import Clock from '~/assets/img/time.png';
 import { Bullet, Blitz, Rapid, Standard } from '../UI/SVG_ICONS';
 import { appStore } from '~/store';
-type Category = 'Bullet' | 'Blitz' | 'Rapid';
+type Category = 'Bullet' | 'Blitz' | 'Rapid' | 'Standard';
 
 interface Pool {
   category: Category;
