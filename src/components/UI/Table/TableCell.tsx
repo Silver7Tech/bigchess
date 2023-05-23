@@ -71,7 +71,7 @@ export const TableCell = <T, K extends keyof T>({
       return <p className='text-center'>{0 | (data[column.key] as any)}</p>;
     case 'status':
       return (
-        <p className="text-xs text-[#12B76A] bg-[#ECFDF3] w-[65px] rounded-lg py-[1px] text-center mx-auto ">
+        <p className="text-xs text-[#12B76A] bg-[#ECFDF3] w-fit rounded-lg py-[1px] px-2 text-center mx-auto ">
           &#x2022;{' Active'}
         </p>
       );
@@ -89,9 +89,12 @@ export const TableCell = <T, K extends keyof T>({
         </div>
       );
     case 'result':
-      return <p>{data[column.key] as any}</p>;
+      return (
+        <p className="text-xs text-[#12B76A] bg-[#ECFDF3] w-fit rounded-lg py-[1px] px-2 text-center mx-auto ">
+          &#x2022;{' '+ data[column.key] as any}
+        </p>)
     case 'opponent':
-      return <p>{data[column.key] as any}</p>;
+      return <p className='text-center'>{data[column.key] as any}</p>;
     case 'wager':
       return <p>$ {data[column.key] as any}</p>;
     case 'edit':

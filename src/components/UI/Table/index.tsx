@@ -3,7 +3,7 @@ import TableRows from './TableRows';
 export type ColumnDefinitionType<T, K extends keyof T> = {
   key: K;
   header: string;
-  width?: number;
+  width?: string;
 }
 
 type TableProps<T, K extends keyof T> = {
