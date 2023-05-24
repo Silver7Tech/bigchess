@@ -5,7 +5,10 @@ import { ReactNode, useState } from "react";
 import { Stripe } from "./Payments";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
-const stripePromise = loadStripe("pk_test_6pRNASCoBOKtIshFeQd4XMUh");
+
+const stripeApiKey = import.meta.env.VITE_STRIPE_KEY || '';
+const stripePromise = loadStripe(stripeApiKey);
+
 type paymentListProps = {
   text: string;
   value: string;

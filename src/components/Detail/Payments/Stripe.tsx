@@ -3,6 +3,8 @@ import { useStripe, useElements, CardElement } from "@stripe/react-stripe-js";
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 import * as Yup from 'yup';
+import { useMutation } from '@tanstack/react-query';
+import { trpc } from '~/helpers/trpc';
 
 const useOptions = () => {
     const options =
@@ -23,7 +25,7 @@ const useOptions = () => {
         },
         hidePostalCode: true,
 
-      }
+    }
   
     return options;
   };
@@ -42,22 +44,30 @@ export const Stripe = () => {
             email: '',
         },
       });
-    async function onSubmit(data: {name: string, email: string }) {
-        console.warn(data);
+    const sendPayment = useMutation({
+        mutationFn: async (data: { paymentMethodId: string }) => await trpc.mutation('payment.stripePayment', data),
+        onSuccess: (data: any) => {
+            console.warn(data);            
+        },
+        onError: (_error: any) => {
+            // show error message in toast
+        },
+    });
+    async function onSubmit(param: {name: string, email: string }) {
         if (!stripe || !elements) {
             return;
         }
-      
-        const payload = await stripe.createPaymentMethod({
+        const { paymentMethod }: any = await stripe.createPaymentMethod({
             elements,
             params: {
                 billing_details : {
-                    name: data.name,
-                    email: data.email
+                    name: param.name,
+                    email: param.email
                 }
             }
         });
-        console.warn(payload)
+        const data = {paymentMethodId: paymentMethod?.id}
+        sendPayment.mutate(data)
     }
 
     return (

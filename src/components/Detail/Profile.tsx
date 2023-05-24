@@ -84,7 +84,7 @@ const columns: ColumnDefinitionType<History, keyof History>[] = [
   {
     key: 'edit',
     header: '',
-    width: '50px',
+    width: 'w-[50px]',
   },
 ];
 const achievementList = [
