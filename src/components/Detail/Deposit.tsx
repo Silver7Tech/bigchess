@@ -2,7 +2,7 @@ import { BalanceIcon, WithdrawIcon, Visa, MasterCard, PaypalIcon, ApplepayIcon, 
 import { Button, Radio } from "~/components/UI";
 import  { BsPlusLg } from 'react-icons/bs'
 import { ReactNode, useState } from "react";
-import { Stripe } from "./Payments";
+import { Applepay, Stripe } from "./Payments";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 
@@ -32,7 +32,9 @@ const Deposit: React.FC = () => {
   const selectPaymentMethod = (value: string) => {
     setUsedMethod(value);
   }
+  
 
+  
   const paymentList: paymentListProps[] = [
     {
       text:"Credit Card / Debit Card",
@@ -98,10 +100,19 @@ const Deposit: React.FC = () => {
             </div>
           </div>
           <div className={`w-0.5 h-[290px] bg-[#B4C7D8] col-span-1 ${top && usedMethod === 'stripe' ? "block" : "hidden"}`}></div>     
-          <div className={`col-span-3 ${top && usedMethod === 'stripe' ? "block" : "hidden"}`}>
+          <div className={`col-span-3`}>
               <Elements stripe={stripePromise}>
-                <Stripe />
+                {
+                  top && usedMethod === 'stripe' ?
+                  <Stripe />
+                  :
+                  top && usedMethod === 'apple' ?
+                  <Applepay />
+                  :
+                  ''
+                }
               </Elements>
+              
           </div>
         </div>
         <div className="mt-10">
